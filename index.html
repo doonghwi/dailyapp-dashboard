@@ -15,15 +15,15 @@
   h1 .sub{display:block;font-size:.9rem;font-weight:400;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:6px}
   .updated{font-size:.82rem;color:var(--muted)}
   .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.74rem;font-weight:800;color:#fff;white-space:nowrap}
-  .b-ask{background:var(--rust)} .b-do{background:var(--sage)} .b-block{background:var(--danger)}
+  .b-ask{background:var(--rust)} .b-do{background:var(--sage)}
   section{margin-top:30px}
   h2{font-size:1.25rem;border-left:6px solid var(--rust);padding-left:12px;margin-bottom:14px}
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
   .card{background:var(--parch);border:1px solid #d8c08a;border-radius:12px;padding:14px;box-shadow:0 2px 0 #d8c08a}
   .card .n{font-size:1.5rem;font-weight:800;color:var(--leather)}
   .card .l{font-size:.8rem;color:var(--muted)}
-  .banner{background:var(--danger);color:#fff;border-radius:12px;padding:14px 16px;margin-top:18px;font-weight:700}
-  .banner a{color:#ffe;}
+  .banner{background:var(--sage);color:#fff;border-radius:12px;padding:14px 16px;margin-top:18px;font-weight:700}
+  .banner a{color:#eafff5;}
   .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
   .links a{background:var(--leather);color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:.85rem;font-weight:700}
   .panel{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:16px;overflow:auto}
@@ -41,7 +41,7 @@
 <div class="wrap">
   <header>
     <h1>🤠 카우보이 듀얼 <span class="sub">DailyApp · Day 1 · Flutter</span></h1>
-    <div class="updated">마지막 업데이트: <strong>2026-06-02 04:55</strong> · Firebase: <code>cowboy-duel-doonghwi</code></div>
+    <div class="updated">마지막 업데이트: <strong>2026-06-02 05:02</strong> · Firebase: <code>cowboy-duel-doonghwi</code></div>
     <div class="links">
       <a href="https://doonghwi.github.io/cowboy-duel/">🎮 웹에서 플레이</a>
       <a href="https://github.com/doonghwi/cowboy-duel">💾 소스 (GitHub)</a>
@@ -49,19 +49,18 @@
   </header>
 
   <div class="banner">
-    ⏳ <b>온라인 대전 마지막 1단계 (너만 가능, 15초)</b> — Firebase 콘솔에서 Realtime Database 생성:
-    <a href="https://console.firebase.google.com/project/cowboy-duel-doonghwi/database">콘솔 열기</a>
-    → '데이터베이스 만들기' → 위치 us-central1 → '테스트 모드로 시작'. 끝나면 "됐어"라고 알려줘!
+    🎉 <b>Day 1 완료!</b> 오프라인(vs CPU) + 온라인(방코드 실시간 대전) 모두 LIVE — 웹·안드로이드 APK 배포 완료.
+    온라인은 브라우저 탭 2개로 테스트: 한쪽 '방 만들기' → 코드 공유 → 다른쪽 '참가하기'.
   </div>
 
   <section>
     <h2>📊 한눈에 보기</h2>
     <div class="cards">
       <div class="card"><div class="n">LIVE</div><div class="l">웹 배포 (플레이 가능)</div></div>
-      <div class="card"><div class="n">43.9MB</div><div class="l">안드로이드 APK 완성</div></div>
+      <div class="card"><div class="n">47.8MB</div><div class="l">안드로이드 APK</div></div>
       <div class="card"><div class="n">12/12</div><div class="l">테스트 통과</div></div>
-      <div class="card"><div class="n">완료</div><div class="l">온라인 코드 + 커밋</div></div>
-      <div class="card"><div class="n">대기</div><div class="l">RTDB 생성 (사용자)</div></div>
+      <div class="card"><div class="n">LIVE</div><div class="l">온라인 방코드 대전</div></div>
+      <div class="card"><div class="n">3</div><div class="l">GitHub repo/페이지</div></div>
     </div>
   </section>
 
@@ -70,9 +69,7 @@
     <pre class="mermaid">
 flowchart TD
   classDef done fill:#2e6e5a,stroke:#1e4a3c,color:#fff;
-  classDef prog fill:#d9a441,stroke:#a87a1e,color:#3b2412;
   classDef todo fill:#efe2c2,stroke:#a9956f,color:#5a4a2c;
-  classDef block fill:#9e2b25,stroke:#6e1a17,color:#fff;
 
   subgraph A[A. 환경 세팅]
     A1[Flutter/JDK/AndroidSDK]:::done
@@ -91,11 +88,11 @@ flowchart TD
     C2[웹 GitHub Pages LIVE]:::done
     C3[안드로이드 APK]:::done
   end
-  subgraph D[D. 온라인 멀티]
+  subgraph D[D. 온라인 멀티 LIVE]
     D1[Firebase 프로젝트 + flutterfire]:::done
-    D2[방코드 대전 코드 + 커밋]:::done
-    D3[RTDB 인스턴스 생성 - 사용자]:::block
-    D4[온라인 빌드·배포]:::todo
+    D2[방코드 대전 코드]:::done
+    D3[RTDB 인스턴스 생성]:::done
+    D4[온라인 빌드·배포]:::done
   end
   B4 --> C2
   C1 --> C2
@@ -121,13 +118,15 @@ flowchart TD
           <tr><td class="time">04:38</td><td><span class="badge b-do">✅ 수행</span></td><td>비용/구조 설명. UI(홈·vsCPU·방법), 2인전 제거</td></tr>
           <tr class="ask"><td class="time">04:40</td><td><span class="badge b-ask">📣 지시</span></td><td>Firebase 새 프로젝트 / 디자인 예쁘게 + 게임디자인 플러그인</td></tr>
           <tr><td class="time">04:42</td><td><span class="badge b-do">✅ 수행</span></td><td>디자인 업그레이드(폰트·사막배경·애니). Firebase CLI 설치</td></tr>
-          <tr><td class="time">04:46</td><td><span class="badge b-do">✅ 수행</span></td><td>analyze 0 issue, 테스트 12/12. <b>GitHub repo 생성·푸시</b>. 웹 빌드</td></tr>
+          <tr><td class="time">04:46</td><td><span class="badge b-do">✅ 수행</span></td><td>analyze 0 issue, 테스트 12/12. <b>GitHub repo 생성·푸시</b></td></tr>
           <tr class="ask"><td class="time">04:47</td><td><span class="badge b-ask">📣 지시</span></td><td>Firebase 로그인 완료 / progress에 지시+수행 둘 다 기록 / 메모리 저장</td></tr>
-          <tr><td class="time">04:48</td><td><span class="badge b-do">✅ 수행</span></td><td>새 Firebase 프로젝트 <code>cowboy-duel-doonghwi</code> 생성. 로깅 규칙 메모리화</td></tr>
-          <tr><td class="time">04:51</td><td><span class="badge b-do">✅ 수행</span></td><td><b>APK 43.9MB 빌드</b>, <b>웹 GitHub Pages LIVE</b>. 오프라인 출시 완료 🎉</td></tr>
-          <tr class="ask"><td class="time">04:53</td><td><span class="badge b-ask">📣 지시</span></td><td>ntfy로 HTML/대시보드를 폰에서 보고싶다</td></tr>
-          <tr><td class="time">04:54</td><td><span class="badge b-do">✅ 수행</span></td><td>대시보드 GitHub Pages 호스팅 + ntfy 링크 발송 (이 페이지!)</td></tr>
-          <tr><td class="time">04:55</td><td><span class="badge b-do">✅ 수행</span></td><td>flutterfire 연결, <b>온라인 방코드 대전 코드 작성·테스트·커밋</b>. RTDB 인스턴스 생성만 사용자 대기</td></tr>
+          <tr><td class="time">04:48</td><td><span class="badge b-do">✅ 수행</span></td><td>새 Firebase 프로젝트 생성. 로깅 규칙 메모리화</td></tr>
+          <tr><td class="time">04:51</td><td><span class="badge b-do">✅ 수행</span></td><td><b>APK 빌드</b>, <b>웹 GitHub Pages LIVE</b>. 오프라인 출시 완료 🎉</td></tr>
+          <tr class="ask"><td class="time">04:53</td><td><span class="badge b-ask">📣 지시</span></td><td>ntfy로 대시보드를 폰에서 보고싶다</td></tr>
+          <tr><td class="time">04:54</td><td><span class="badge b-do">✅ 수행</span></td><td>대시보드 GitHub Pages 호스팅 + ntfy 링크 (이 페이지!)</td></tr>
+          <tr><td class="time">04:55</td><td><span class="badge b-do">✅ 수행</span></td><td>온라인 방코드 대전 코드 작성·테스트·커밋</td></tr>
+          <tr class="ask"><td class="time">05:00</td><td><span class="badge b-ask">📣 지시</span></td><td>RTDB 테스트 모드로 생성 완료</td></tr>
+          <tr><td class="time">05:02</td><td><span class="badge b-do">✅ 수행</span></td><td>DB URL 주입(asia-southeast1), <b>웹+APK 온라인 빌드 재배포</b>. 온라인 대전 LIVE 🎉</td></tr>
         </tbody>
       </table>
     </div>
@@ -137,9 +136,9 @@ flowchart TD
     <h2>🎯 다음 단계</h2>
     <div class="panel">
       <ol style="margin:0;padding-left:20px">
-        <li>✅ <s>웹 배포</s> · ✅ <s>APK</s> · ✅ <s>온라인 코드</s></li>
-        <li><b>대기 중</b>: 사용자가 RTDB 생성(콘솔 클릭) → DB URL 연결 → 온라인 빌드·배포</li>
-        <li>(추후) Mac 환경에서 iOS 버전</li>
+        <li>✅ <s>웹 배포</s> · ✅ <s>APK</s> · ✅ <s>온라인 방코드 대전</s> — Day 1 완료</li>
+        <li>(추후) Mac 환경에서 iOS 버전 빌드</li>
+        <li>(추후) RTDB 테스트모드 30일 만료 전 정식 보안규칙 적용</li>
       </ol>
     </div>
   </section>
