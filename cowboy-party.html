@@ -4,9 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>🎉 카우보이 파티 — 빌드 로그</title>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
 <style>
-  :root{--sand:#e8d5a8;--parch:#f5ead0;--leather:#3b2412;--rust:#c8541e;--danger:#9e2b25;--sage:#2e6e5a;--gold:#d9a441;--ink:#241a12;--muted:#7a6748;}
+  :root{--sand:#e8d5a8;--parch:#f5ead0;--leather:#3b2412;--rust:#c8541e;--danger:#9e2b25;--sage:#2e6e5a;--gold:#d9a441;--nova:#f2a93b;--ink:#241a12;--muted:#7a6748;--line:#e0cfa0;}
   *{box-sizing:border-box}
   body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:radial-gradient(circle at 50% -10%,#f7eccf 0%,#e8d5a8 60%,#ddc792 100%);color:var(--ink);line-height:1.5;min-height:100vh}
   .wrap{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
@@ -17,17 +16,19 @@
   .updated{font-size:.82rem;color:var(--muted)}
   .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.74rem;font-weight:800;color:#fff;white-space:nowrap}
   .b-ask{background:var(--rust)} .b-do{background:var(--sage)}
+  .b-feat{background:var(--gold);color:#3b2412} .b-fix{background:var(--danger)} .b-new{background:var(--nova);color:#3b2412}
   section{margin-top:30px}
   h2{font-size:1.25rem;border-left:6px solid var(--rust);padding-left:12px;margin-bottom:14px}
   .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
   .links a{background:var(--leather);color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:.85rem;font-weight:700}
   .panel{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:16px;overflow:auto}
   table{width:100%;border-collapse:collapse;font-size:.9rem}
-  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e0cfa0;vertical-align:top}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
   th{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:1px}
   td.time{white-space:nowrap;color:var(--muted)}
   tr.ask{background:#fbf0db}
-  .mermaid{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:14px}
+  .st{font-size:.72rem;font-weight:800;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .st-live{background:#dff3e9;color:var(--sage)} .st-wip{background:#fdeccf;color:#9a6a1a}
   code{background:#efe2c2;padding:1px 5px;border-radius:5px;font-size:.86em}
   .rule{background:#fbf0db;border:1px solid #e8d39a;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:.9rem}
   footer{margin-top:36px;text-align:center;color:var(--muted);font-size:.78rem}
@@ -42,51 +43,47 @@
     <div class="links">
       <a href="https://doonghwi.github.io/cowboy-party/">🎮 웹에서 플레이</a>
       <a href="https://github.com/doonghwi/cowboy-party">💾 소스 (GitHub)</a>
+      <a href="https://github.com/doonghwi/cowboy-party/releases/tag/v1.0.0">📱 APK</a>
     </div>
   </header>
 
   <section>
-    <h2>📜 게임 규칙 (단순화 · 2~6인)</h2>
+    <h2>📜 게임 규칙</h2>
     <div class="panel">
       <div class="rule">👥 <b>2~6명</b>이 원을 그려 앉아요. 온라인 방(최대 인원 선택) 또는 컴퓨터 봇 1~5명과 대결.</div>
-      <div class="rule">🔄 <b>장전</b> — 총알 +1(최대 6). 빵야는 <b>이전 턴까지 모은 총알</b>로만(첫 턴 발사 불가).</div>
-      <div class="rule">💥 <b>빵야(아무나)</b> — 살아있는 다른 누구든 1명을 골라 쏨(원에서 탭). 총알 1발 필요·소모.</div>
-      <div class="rule">🛡️ <b>방어(전부 막기)</b> — 그 턴 나에게 오는 <b>모든 공격</b>을 무효. 여러 명이 동시에 쏴도 한 번이면 다 막음.</div>
-      <div class="rule">🏆 막지 못한 한 발이면 즉시 탈락(동시 다중 탈락 가능). 최후 1인 승리, 전원 동시 탈락이면 무승부.</div>
+      <div class="rule">🔄 <b>장전</b> — 총알 +1(최대 6). 빵야는 이전 턴까지 모은 총알로만(첫 턴 발사 불가).</div>
+      <div class="rule">💥 <b>빵야</b> — 살아있는 다른 누구든 1명을 골라 쏨(원에서 탭). 총알 1발 필요·소모.</div>
+      <div class="rule">🛡️ <b>방어</b> — 그 턴 나에게 오는 <b>모든 일반 공격</b>을 무효(여러 명이 쏴도 다 막음).</div>
+      <div class="rule" style="border-color:#f2a93b;background:#fdf0d8">⚡ <b>슈퍼빵야</b> — 6발이 차면 장전칸이 슈퍼빵야로 바뀜. <b>5발 소비, 방어를 무시하고 확정 명중</b>. 무한 방어 견제용.</div>
+      <div class="rule">🏆 막지 못한 한 발이면 즉시 탈락(동시 다중 탈락 가능). 최후 1인 승리.</div>
+      <div class="rule" style="border-color:#9e2b25;background:#f7e3df">🤠 <b>마지막 전원 동시 탈락</b>이면 무승부 대신 <b>반응속도 결투</b>("준비…→카우보이! 지금 탭!", 미리 누르면 부정출발 패배)로 최후의 1인을 가림.</div>
     </div>
   </section>
 
   <section>
-    <h2>🗺️ 작업 DAG</h2>
-    <pre class="mermaid">
-flowchart TD
-  classDef done fill:#2e6e5a,stroke:#1e4a3c,color:#fff;
-  subgraph A[A. 새 인프라]
-    A1[새 Firebase cowboy-party-doonghwi]:::done
-    A2[RTDB asia-southeast1 · 관리API 헤드리스 생성·규칙배포]:::done
-    A3[새 repo cowboy-party + GitHub Pages]:::done
-  end
-  subgraph B[B. 게임 빌드 - 2~6인 일반화]
-    B1[순수 로직 resolveTurn N인 · 타겟 저격 + 테스트 10개]:::done --> B2[오프라인 vs 봇 1~5]:::done
-    B1 --> B3[온라인 2~6인 방 · 결정적 리플레이]:::done
-    B1 --> B4[원형 좌석 UI · 총알 궤적선 · 타겟탭 액션바]:::done
-  end
-  subgraph C[C. 배포 / 검증]
-    C1[웹 GitHub Pages LIVE]:::done
-    C2[안드로이드 APK]:::done
-    C3[에뮬 검증: 6인 원형 · 저격·방어·탈락 스크린샷]:::done
-  end
-  subgraph D[D. 실시간 대시보드]
-    D1[중앙 dailyapp_stats 핑 → 카드 자동등록]:::done
-    D2[빌드 현황 desc 실시간 갱신]:::done
-  end
-  A1 --> A2 --> A3
-  A2 --> B3
-  B2 --> C2
-  B3 --> C1
-  C1 --> C3 --> C2
-  C3 --> D2
-    </pre>
+    <h2>🆕 기능 업데이트 로그</h2>
+    <p class="updated" style="margin:0 0 12px 2px">무엇을 추가/수정했는지 한눈에. <span class="st st-live">LIVE</span> 배포됨 · <span class="st st-wip">배포중</span> 구현완료·배포 진행</p>
+    <div class="panel">
+      <table>
+        <thead><tr><th>구분</th><th>기능 / 수정</th><th>설명</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge b-feat">기능</span></td><td>2~6인 원형 대결</td><td>온라인 방(최대인원 2~6 선택·코드 입장) + 컴퓨터전(봇 1~5). 동그랗게 둘러앉는 원형 좌석 배치.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-feat">기능</span></td><td>한 턴 한 행동 규칙</td><td>장전 / 방어(모든 공격 무효) / 빵야(아무나 1명 저격). 동시 선택·공개·판정.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-feat">기능</span></td><td>원형 UI · 총알 궤적 화살표</td><td>나=하단 고정, 누가 누구를 쐈는지 화살표로 표시. 타겟은 원에서 탭으로 선택.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-feat">기능</span></td><td>온라인 결정적 리플레이</td><td>Firebase RTDB 무브로그(t0,t1…) 기반, 모든 기기가 같은 결과. 호스트 시작·재대결.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-feat">기능</span></td><td>사용량 집계 자동 등록</td><td>앱 열릴 때 중앙 <code>dailyapp_stats</code>로 핑 → 대시보드 카드/사용량 자동 표시.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-feat">기능</span></td><td>반응속도 결투(무승부 방지)</td><td>마지막 전원 동시 탈락 시 "준비…→카우보이! 지금 탭!" 반응 대결. 부정출발=패배, 전원 부정출발=재시작. 온라인은 서버시계 동기화.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-feat">기능</span></td><td>온라인 턴 리빌</td><td>턴 해소 후 잠깐 reveal 단계 → 매 턴 궤적선이 항상 보이게.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-new">신규</span></td><td>이모티콘 인게임 리액션</td><td>게임 중 😂😎😡😭 4종을 탭해 내 좌석 위로 감정 표현(온라인은 전체에게 전송). Twemoji 내장.</td><td><span class="st st-wip">배포중</span></td></tr>
+          <tr><td><span class="badge b-new">신규</span></td><td>장전/방어 시각 이펙트</td><td>장전=금색 "+1" 팝, 방어=방패 링이 좌석에 떠서 무엇을 했는지 한눈에.</td><td><span class="st st-wip">배포중</span></td></tr>
+          <tr><td><span class="badge b-new">신규</span></td><td>⚡ 슈퍼빵야</td><td>총알 6발이면 장전칸 → 슈퍼빵야(5발 소비·방어 무시 확정킬). 무한 방어 전략 견제. 강화 화살표 이펙트.</td><td><span class="st st-wip">배포중</span></td></tr>
+          <tr><td><span class="badge b-feat">기능</span></td><td>승리 즉시 점수 반영</td><td>다음 판으로 넘어가지 않아도 이긴 즉시 점수판이 올라가도록.</td><td><span class="st st-wip">배포중</span></td></tr>
+          <tr><td><span class="badge b-fix">수정</span></td><td>퇴장 오판 / 멈춤</td><td>연결 깜빡임에 잘못 "나감" 처리되던 onDisconnect 제거 → 하트비트+14초 유예로 교체. 진짜 나간 사람만 자동 제외해 게임 안 멈춤, 재입장 시 같은 좌석 복귀.</td><td><span class="st st-wip">배포중</span></td></tr>
+          <tr><td><span class="badge b-fix">수정</span></td><td>RTDB 기본 인스턴스 생성</td><td>콘솔 없이 Firebase 관리 REST API로 헤드리스 생성(refresh 토큰 사용).</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-fix">수정</span></td><td>웹 base-href 경로 깨짐</td><td>Git Bash가 <code>/cowboy-party/</code>를 윈도 경로로 변환 → PowerShell로 빌드.</td><td><span class="st st-live">LIVE</span></td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <section>
@@ -95,11 +92,12 @@ flowchart TD
       <table>
         <thead><tr><th>시각</th><th>구분</th><th>내용</th></tr></thead>
         <tbody>
-          <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 지시</span></td><td>cowboyparty_spec 기반 <b>완전 새 앱</b>(카우보이 듀얼의 2~6인 일반화, 추후 온라인 대체) — 새 폴더·repo·Pages·<b>새 Firebase</b> / 온라인 2~6인 방 + 컴퓨터전 / 한 턴 한 행동(장전·방어=다막음·빵야=아무나 1명) / 1힛 즉사·최후 1인 승리 / 에뮬 검증 + <code>--pwa-strategy=none</code> / 완성까지 멈추지 말 것</td></tr>
-          <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 추가</span></td><td>① 진행상황 한글로 보고 ② 이 <b>대시보드에 실시간 반영</b> ③ <b>6명 원형 배치</b> ④ <b>사용량 집계</b> 미리 세팅</td></tr>
-          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>cowboy_trio 기반으로 스캐폴딩 후 <b>전면 재작성</b>. 새 Firebase <code>cowboy-party-doonghwi</code> + RTDB(asia-southeast1) <b>관리 API 헤드리스 생성</b>·규칙 배포. 순수 로직 <code>resolveTurn</code>을 N인 + <b>타겟 저격</b>으로 재설계(방어=모든 공격 무효), 단위테스트 10/10·analyze 0. CPU AI N인 타겟팅. 새 repo <code>cowboy-party</code> 푸시.</td></tr>
-          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td><b>원형 좌석 UI</b>(나=하단, 6인까지 원형 배치) + <b>총알 궤적선</b>(누가 누구를 쐈는지 화살표) + 타겟을 원에서 탭하는 액션바. 오프라인(봇 1~5)·온라인(방 최대인원 2~6 선택·호스트 시작·재대결) 화면. <b>사용량 집계</b>를 중앙 <code>dailyapp_stats</code>로 핑(대시보드 카드 자동 등록). 빌드 현황을 <code>desc</code>에 실시간 갱신.</td></tr>
-          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td><b>에뮬 검증</b>(6인 원형): 홈→봇 5명→6인 원형 테이블→전원 장전→다음 턴 4봇이 나를 동시 저격·1봇 방어로 생존·나 피격 탈락(궤적선·해골 스크린샷). 탈락 후 사람 입력 막고 <b>관전 모드</b>로 보강. 릴리스 APK 빌드.</td></tr>
+          <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 지시</span></td><td>cowboyparty_spec 기반 완전 새 앱(카우보이 듀얼의 2~6인 일반화) — 새 폴더·repo·Pages·새 Firebase / 온라인 2~6인 + 컴퓨터전 / 한 턴 한 행동 / 1힛 즉사·최후 1인 승리 / 에뮬 검증 + <code>--pwa-strategy=none</code> / 완성까지 멈추지 말 것</td></tr>
+          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>cowboy_trio 기반 전면 재작성. 새 Firebase + RTDB(관리 API 헤드리스 생성)·규칙 배포. N인 타겟 저격 로직·CPU AI. 원형 UI·궤적선. 오프라인/온라인 화면. 사용량 집계. 에뮬 6인 검증(궤적·해골 스크린샷). 웹 LIVE + APK v1.0.0.</td></tr>
+          <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 피드백</span></td><td>① 게임 중/종료 후 나가도 반영 안 됨·멈춤 ② 온라인 화살표가 안 보일 때가 있음 ③ 마지막 무승부를 반응속도 대결로</td></tr>
+          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>나간 사람 프런티어 자동 제외(멈춤 해결)·onDisconnect/await leave·온라인 reveal 단계·반응속도 결투(RTDB showdown+서버시계). 단위테스트 추가, analyze 0. 재배포.</td></tr>
+          <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 피드백</span></td><td>① 가만히 있었는데 나가짐(관전 상태) ② 장전·방어 이펙트 추가 ③ 이모티콘 4종 인게임 리액션 ④ 승리 즉시 점수 ⑤ 슈퍼빵야 룰(6발→5발 소비 확정킬, 화려한 이펙트) ⑥ 빌드로그 표로(DAG 제거)·기록 규칙 메모리화</td></tr>
+          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>onDisconnect 오판 제거 → 하트비트+유예. 장전/방어 이펙트·이모티콘 리액션·즉시 점수·슈퍼빵야 구현. 빌드로그를 기능 표로 개편(DAG 제거). 기록 규칙 메모리 저장. (배포 진행 중)</td></tr>
         </tbody>
       </table>
     </div>
@@ -108,14 +106,15 @@ flowchart TD
   <section>
     <h2>🪤 이 앱에서 챙긴 교훈</h2>
     <div class="panel">
-      <div class="rule">🔥 RTDB 기본 인스턴스는 콘솔 없이 <b>Firebase 관리 REST API</b>(firebasedatabase.googleapis.com)로 헤드리스 생성 — CLI 토큰 갱신 후 <code>type:DEFAULT_DATABASE</code> PUT.</div>
-      <div class="rule">📊 대시보드는 중앙 <code>dailyapp_stats</code> 한 곳을 읽어 <b>핑하면 자동 등록</b>. 새 앱은 앱 열릴 때 그 노드로 opens/이름/플랫폼을 쓰면 코드 수정 없이 카드가 뜬다.</div>
-      <div class="rule">🎯 듀얼/트리오의 <b>방향 빵야</b>를 버리고 <b>임의 타겟 저격</b>으로 일반화 — Move를 (kind, target)로, 인코딩은 0=장전·1=방어·2+target=저격.</div>
+      <div class="rule">🔥 RTDB 기본 인스턴스는 콘솔 없이 <b>Firebase 관리 REST API</b>로 헤드리스 생성(refresh 토큰 → <code>type:DEFAULT_DATABASE</code> PUT).</div>
+      <div class="rule">📊 사용량 집계는 중앙 <code>dailyapp_stats</code>에 <b>증분(transaction)만</b>, 메타 시드 시 opens 키 덮어쓰기 금지. 핑하면 카드 자동 등록.</div>
+      <div class="rule">🎯 듀얼/트리오의 방향 빵야를 버리고 <b>임의 타겟 저격</b>으로 일반화. Move=(kind,target), 인코딩 0=장전·1=방어·2+=빵야·8+=슈퍼빵야.</div>
+      <div class="rule">🛰️ 온라인 퇴장은 <b>onDisconnect 하드 제거가 위험</b>(깜빡임에 오판). <b>하트비트 + 유예시간</b>으로 판정해야 안 쫓겨나고 멈춤도 막힘.</div>
+      <div class="rule">🖥️ 웹 빌드 <code>--base-href</code>의 앞 <code>/</code>가 Git Bash에서 경로 변환됨 → PowerShell로 빌드하거나 <code>MSYS_NO_PATHCONV=1</code>.</div>
     </div>
   </section>
 
   <footer>🤖 Claude Code가 자동 생성·갱신 · 카우보이 파티 (2~6인 원형 눈치 대결)</footer>
 </div>
-<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables:{fontFamily:'Segoe UI'}});</script>
 </body>
 </html>
