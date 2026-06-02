@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🎉 카우보이 파티 — 빌드 로그</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  :root{--sand:#e8d5a8;--parch:#f5ead0;--leather:#3b2412;--rust:#c8541e;--danger:#9e2b25;--sage:#2e6e5a;--gold:#d9a441;--ink:#241a12;--muted:#7a6748;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:radial-gradient(circle at 50% -10%,#f7eccf 0%,#e8d5a8 60%,#ddc792 100%);color:var(--ink);line-height:1.5;min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
+  a.back{display:inline-block;margin-bottom:10px;color:var(--rust);text-decoration:none;font-weight:700}
+  header{text-align:center;border-bottom:4px double var(--leather);padding-bottom:16px}
+  h1{font-size:1.9rem;margin:.2em 0;letter-spacing:1px}
+  h1 .sub{display:block;font-size:.9rem;font-weight:400;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:6px}
+  .updated{font-size:.82rem;color:var(--muted)}
+  .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.74rem;font-weight:800;color:#fff;white-space:nowrap}
+  .b-ask{background:var(--rust)} .b-do{background:var(--sage)}
+  section{margin-top:30px}
+  h2{font-size:1.25rem;border-left:6px solid var(--rust);padding-left:12px;margin-bottom:14px}
+  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
+  .links a{background:var(--leather);color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:.85rem;font-weight:700}
+  .panel{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:16px;overflow:auto}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e0cfa0;vertical-align:top}
+  th{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:1px}
+  td.time{white-space:nowrap;color:var(--muted)}
+  tr.ask{background:#fbf0db}
+  .mermaid{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:14px}
+  code{background:#efe2c2;padding:1px 5px;border-radius:5px;font-size:.86em}
+  .rule{background:#fbf0db;border:1px solid #e8d39a;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:.9rem}
+  footer{margin-top:36px;text-align:center;color:var(--muted);font-size:.78rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← DailyApp 대시보드로</a>
+  <header>
+    <h1>🎉 카우보이 파티 <span class="sub">Day 4 · Flutter · 빌드 로그</span></h1>
+    <div class="updated">Firebase: <code>cowboy-party-doonghwi</code> · RTDB asia-southeast1 · 카우보이 듀얼의 <b>2~6인 일반화</b></div>
+    <div class="links">
+      <a href="https://doonghwi.github.io/cowboy-party/">🎮 웹에서 플레이</a>
+      <a href="https://github.com/doonghwi/cowboy-party">💾 소스 (GitHub)</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>📜 게임 규칙 (단순화 · 2~6인)</h2>
+    <div class="panel">
+      <div class="rule">👥 <b>2~6명</b>이 원을 그려 앉아요. 온라인 방(최대 인원 선택) 또는 컴퓨터 봇 1~5명과 대결.</div>
+      <div class="rule">🔄 <b>장전</b> — 총알 +1(최대 6). 빵야는 <b>이전 턴까지 모은 총알</b>로만(첫 턴 발사 불가).</div>
+      <div class="rule">💥 <b>빵야(아무나)</b> — 살아있는 다른 누구든 1명을 골라 쏨(원에서 탭). 총알 1발 필요·소모.</div>
+      <div class="rule">🛡️ <b>방어(전부 막기)</b> — 그 턴 나에게 오는 <b>모든 공격</b>을 무효. 여러 명이 동시에 쏴도 한 번이면 다 막음.</div>
+      <div class="rule">🏆 막지 못한 한 발이면 즉시 탈락(동시 다중 탈락 가능). 최후 1인 승리, 전원 동시 탈락이면 무승부.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🗺️ 작업 DAG</h2>
+    <pre class="mermaid">
+flowchart TD
+  classDef done fill:#2e6e5a,stroke:#1e4a3c,color:#fff;
+  subgraph A[A. 새 인프라]
+    A1[새 Firebase cowboy-party-doonghwi]:::done
+    A2[RTDB asia-southeast1 · 관리API 헤드리스 생성·규칙배포]:::done
+    A3[새 repo cowboy-party + GitHub Pages]:::done
+  end
+  subgraph B[B. 게임 빌드 - 2~6인 일반화]
+    B1[순수 로직 resolveTurn N인 · 타겟 저격 + 테스트 10개]:::done --> B2[오프라인 vs 봇 1~5]:::done
+    B1 --> B3[온라인 2~6인 방 · 결정적 리플레이]:::done
+    B1 --> B4[원형 좌석 UI · 총알 궤적선 · 타겟탭 액션바]:::done
+  end
+  subgraph C[C. 배포 / 검증]
+    C1[웹 GitHub Pages LIVE]:::done
+    C2[안드로이드 APK]:::done
+    C3[에뮬 검증: 6인 원형 · 저격·방어·탈락 스크린샷]:::done
+  end
+  subgraph D[D. 실시간 대시보드]
+    D1[중앙 dailyapp_stats 핑 → 카드 자동등록]:::done
+    D2[빌드 현황 desc 실시간 갱신]:::done
+  end
+  A1 --> A2 --> A3
+  A2 --> B3
+  B2 --> C2
+  B3 --> C1
+  C1 --> C3 --> C2
+  C3 --> D2
+    </pre>
+  </section>
+
+  <section>
+    <h2>📜 작업 로그 — 시킨 일(📣) & 한 일(✅)</h2>
+    <div class="panel">
+      <table>
+        <thead><tr><th>시각</th><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 지시</span></td><td>cowboyparty_spec 기반 <b>완전 새 앱</b>(카우보이 듀얼의 2~6인 일반화, 추후 온라인 대체) — 새 폴더·repo·Pages·<b>새 Firebase</b> / 온라인 2~6인 방 + 컴퓨터전 / 한 턴 한 행동(장전·방어=다막음·빵야=아무나 1명) / 1힛 즉사·최후 1인 승리 / 에뮬 검증 + <code>--pwa-strategy=none</code> / 완성까지 멈추지 말 것</td></tr>
+          <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 추가</span></td><td>① 진행상황 한글로 보고 ② 이 <b>대시보드에 실시간 반영</b> ③ <b>6명 원형 배치</b> ④ <b>사용량 집계</b> 미리 세팅</td></tr>
+          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>cowboy_trio 기반으로 스캐폴딩 후 <b>전면 재작성</b>. 새 Firebase <code>cowboy-party-doonghwi</code> + RTDB(asia-southeast1) <b>관리 API 헤드리스 생성</b>·규칙 배포. 순수 로직 <code>resolveTurn</code>을 N인 + <b>타겟 저격</b>으로 재설계(방어=모든 공격 무효), 단위테스트 10/10·analyze 0. CPU AI N인 타겟팅. 새 repo <code>cowboy-party</code> 푸시.</td></tr>
+          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td><b>원형 좌석 UI</b>(나=하단, 6인까지 원형 배치) + <b>총알 궤적선</b>(누가 누구를 쐈는지 화살표) + 타겟을 원에서 탭하는 액션바. 오프라인(봇 1~5)·온라인(방 최대인원 2~6 선택·호스트 시작·재대결) 화면. <b>사용량 집계</b>를 중앙 <code>dailyapp_stats</code>로 핑(대시보드 카드 자동 등록). 빌드 현황을 <code>desc</code>에 실시간 갱신.</td></tr>
+          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td><b>에뮬 검증</b>(6인 원형): 홈→봇 5명→6인 원형 테이블→전원 장전→다음 턴 4봇이 나를 동시 저격·1봇 방어로 생존·나 피격 탈락(궤적선·해골 스크린샷). 탈락 후 사람 입력 막고 <b>관전 모드</b>로 보강. 릴리스 APK 빌드.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>🪤 이 앱에서 챙긴 교훈</h2>
+    <div class="panel">
+      <div class="rule">🔥 RTDB 기본 인스턴스는 콘솔 없이 <b>Firebase 관리 REST API</b>(firebasedatabase.googleapis.com)로 헤드리스 생성 — CLI 토큰 갱신 후 <code>type:DEFAULT_DATABASE</code> PUT.</div>
+      <div class="rule">📊 대시보드는 중앙 <code>dailyapp_stats</code> 한 곳을 읽어 <b>핑하면 자동 등록</b>. 새 앱은 앱 열릴 때 그 노드로 opens/이름/플랫폼을 쓰면 코드 수정 없이 카드가 뜬다.</div>
+      <div class="rule">🎯 듀얼/트리오의 <b>방향 빵야</b>를 버리고 <b>임의 타겟 저격</b>으로 일반화 — Move를 (kind, target)로, 인코딩은 0=장전·1=방어·2+target=저격.</div>
+    </div>
+  </section>
+
+  <footer>🤖 Claude Code가 자동 생성·갱신 · 카우보이 파티 (2~6인 원형 눈치 대결)</footer>
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables:{fontFamily:'Segoe UI'}});</script>
+</body>
+</html>
