@@ -3,148 +3,173 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>🤠 DailyApp 진행 대시보드 — 카우보이 듀얼</title>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<title>🛠️ DailyApp 대시보드 — 하루에 앱 하나</title>
 <style>
-  :root{--sand:#e8d5a8;--parch:#f5ead0;--leather:#3b2412;--rust:#c8541e;--danger:#9e2b25;--sage:#2e6e5a;--gold:#d9a441;--ink:#241a12;--muted:#7a6748;}
+  :root{--sand:#e8d5a8;--parch:#f5ead0;--leather:#3b2412;--rust:#c8541e;--danger:#9e2b25;--sage:#2e6e5a;--gold:#d9a441;--ink:#241a12;--muted:#7a6748;--line:#e0cfa0;}
   *{box-sizing:border-box}
-  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:radial-gradient(circle at 50% -10%,#f7eccf 0%,#e8d5a8 60%,#ddc792 100%);color:var(--ink);line-height:1.5;min-height:100vh}
-  .wrap{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:radial-gradient(circle at 50% -10%,#f7eccf 0%,#e8d5a8 60%,#ddc792 100%);color:var(--ink);line-height:1.55;min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 80px}
   header{text-align:center;border-bottom:4px double var(--leather);padding-bottom:16px}
-  h1{font-size:1.9rem;margin:.2em 0;letter-spacing:1px}
+  h1{font-size:2rem;margin:.2em 0;letter-spacing:1px}
   h1 .sub{display:block;font-size:.9rem;font-weight:400;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:6px}
   .updated{font-size:.82rem;color:var(--muted)}
-  .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.74rem;font-weight:800;color:#fff;white-space:nowrap}
-  .b-ask{background:var(--rust)} .b-do{background:var(--sage)}
-  section{margin-top:30px}
-  h2{font-size:1.25rem;border-left:6px solid var(--rust);padding-left:12px;margin-bottom:14px}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
-  .card{background:var(--parch);border:1px solid #d8c08a;border-radius:12px;padding:14px;box-shadow:0 2px 0 #d8c08a}
-  .card .n{font-size:1.5rem;font-weight:800;color:var(--leather)}
-  .card .l{font-size:.8rem;color:var(--muted)}
-  .banner{background:var(--sage);color:#fff;border-radius:12px;padding:14px 16px;margin-top:18px;font-weight:700}
-  .banner a{color:#eafff5;}
-  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
-  .links a{background:var(--leather);color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:.85rem;font-weight:700}
-  .panel{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:16px;overflow:auto}
-  table{width:100%;border-collapse:collapse;font-size:.9rem}
-  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e0cfa0;vertical-align:top}
-  th{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:1px}
-  td.time{white-space:nowrap;color:var(--muted)}
-  tr.ask{background:#fbf0db}
-  .mermaid{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:14px}
+  section{margin-top:34px}
+  h2{font-size:1.3rem;border-left:6px solid var(--rust);padding-left:12px;margin-bottom:6px}
+  .hint{color:var(--muted);font-size:.85rem;margin:0 0 14px 18px}
+  /* app cards */
+  .apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .app{background:var(--parch);border:1px solid #d8c08a;border-radius:16px;padding:18px;box-shadow:0 3px 0 #d8c08a}
+  .app h3{margin:0 0 4px;font-size:1.2rem}
+  .app .day{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+  .chip{font-size:.72rem;font-weight:800;padding:3px 9px;border-radius:999px;color:#fff}
+  .c-web{background:var(--sage)} .c-and{background:var(--rust)} .c-on{background:var(--gold);color:#3b2412} .c-ios{background:#9a8}
+  .usage{display:flex;align-items:baseline;gap:8px;margin-top:10px}
+  .usage .big{font-size:2rem;font-weight:900;color:var(--leather)}
+  .usage .lab{font-size:.8rem;color:var(--muted)}
+  .sub2{font-size:.78rem;color:var(--muted);margin-top:2px}
+  .applinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .applinks a{font-size:.8rem;font-weight:700;text-decoration:none;background:var(--leather);color:#fff;padding:6px 10px;border-radius:8px}
+  .cand{margin-top:10px;font-size:.82rem;font-weight:800;padding:5px 10px;border-radius:8px;display:inline-block}
+  .cand.yes{background:#dff3e9;color:var(--sage)} .cand.no{background:#f3e6cf;color:var(--muted)}
+  /* tables */
+  .panel{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:14px;overflow:auto}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-size:.74rem;text-transform:uppercase;letter-spacing:1px}
+  .stars{color:var(--gold);letter-spacing:1px}
   code{background:#efe2c2;padding:1px 5px;border-radius:5px;font-size:.86em}
-  footer{margin-top:36px;text-align:center;color:var(--muted);font-size:.78rem}
+  .pill{font-size:.72rem;font-weight:800;padding:2px 8px;border-radius:999px;color:#fff}
+  .p-fix{background:var(--sage)} .p-trap{background:var(--danger)}
+  footer{margin-top:40px;text-align:center;color:var(--muted);font-size:.78rem}
+  .note{background:#fbf0db;border:1px solid #e8d39a;border-radius:10px;padding:10px 14px;font-size:.85rem;color:#6a5526;margin-top:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>🤠 카우보이 듀얼 <span class="sub">DailyApp · Day 1 · Flutter</span></h1>
-    <div class="updated">마지막 업데이트: <strong>2026-06-02 05:02</strong> · Firebase: <code>cowboy-duel-doonghwi</code></div>
-    <div class="links">
-      <a href="https://doonghwi.github.io/cowboy-duel/">🎮 웹에서 플레이</a>
-      <a href="https://github.com/doonghwi/cowboy-duel">💾 소스 (GitHub)</a>
-    </div>
+    <h1>🛠️ DailyApp 대시보드 <span class="sub">하루에 앱 하나 · 방법론 & 사용량</span></h1>
+    <div class="updated">제작자 doonghwi · 자동 갱신 · 사용량은 Firebase에서 실시간 로드</div>
   </header>
 
-  <div class="banner">
-    🎉 <b>Day 1 완료!</b> 오프라인(vs CPU) + 온라인(방코드 실시간 대전) 모두 LIVE — 웹·안드로이드 APK 배포 완료.
-    온라인은 브라우저 탭 2개로 테스트: 한쪽 '방 만들기' → 코드 공유 → 다른쪽 '참가하기'.
-  </div>
-
+  <!-- ===== APPS + USAGE ===== -->
   <section>
-    <h2>📊 한눈에 보기</h2>
-    <div class="cards">
-      <div class="card"><div class="n">LIVE</div><div class="l">웹 배포 (플레이 가능)</div></div>
-      <div class="card"><div class="n">47.8MB</div><div class="l">안드로이드 APK</div></div>
-      <div class="card"><div class="n">12/12</div><div class="l">테스트 통과</div></div>
-      <div class="card"><div class="n">LIVE</div><div class="l">온라인 방코드 대전</div></div>
-      <div class="card"><div class="n">3</div><div class="l">GitHub repo/페이지</div></div>
-    </div>
+    <h2>📱 앱 목록 & 사용량</h2>
+    <p class="hint">실제 사용량(앱 열린 횟수)을 보고 <b>정식 출시할 앱</b>을 골라요. 숫자는 Firebase에서 실시간 로드됩니다.</p>
+    <div class="apps" id="apps"><!-- JS로 채움 --></div>
   </section>
 
+  <!-- ===== METHODOLOGY: PITFALLS ===== -->
   <section>
-    <h2>🗺️ 작업 DAG</h2>
-    <pre class="mermaid">
-flowchart TD
-  classDef done fill:#2e6e5a,stroke:#1e4a3c,color:#fff;
-  classDef todo fill:#efe2c2,stroke:#a9956f,color:#5a4a2c;
-
-  subgraph A[A. 환경 세팅]
-    A1[Flutter/JDK/AndroidSDK]:::done
-    A2[gh + Firebase CLI + 로그인]:::done
-    A3[메모리/세션기억]:::done
-    A4[ntfy 알림]:::done
-  end
-  subgraph B[B. 게임 빌드]
-    B1[로직 + 테스트 12/12]:::done --> B2[CPU AI]:::done
-    B1 --> B3[디자인: 폰트·사막·애니]:::done
-    B3 --> B4[vs CPU + 카우보이 연출]:::done
-    B3 --> B5[게임 방법]:::done
-  end
-  subgraph C[C. 배포 / 버전관리]
-    C1[GitHub repo]:::done
-    C2[웹 GitHub Pages LIVE]:::done
-    C3[안드로이드 APK]:::done
-  end
-  subgraph D[D. 온라인 멀티 LIVE]
-    D1[Firebase 프로젝트 + flutterfire]:::done
-    D2[방코드 대전 코드]:::done
-    D3[RTDB 인스턴스 생성]:::done
-    D4[온라인 빌드·배포]:::done
-  end
-  B4 --> C2
-  C1 --> C2
-  C1 --> C3
-  D1 --> D2 --> D3 --> D4
-    </pre>
-  </section>
-
-  <section>
-    <h2>📜 작업 로그 — 시킨 일(📣) & 한 일(✅)</h2>
+    <h2>🪤 함정 로그 — 다시 안 틀리려고</h2>
+    <p class="hint">바이브코딩 하며 휘발되던 시행착오를 여기 누적합니다. (문제 → 원인 → 해결)</p>
     <div class="panel">
       <table>
-        <thead><tr><th>시각</th><th>구분</th><th>내용</th></tr></thead>
+        <thead><tr><th>영역</th><th>문제</th><th>원인 / 해결</th></tr></thead>
         <tbody>
-          <tr class="ask"><td class="time">04:10</td><td><span class="badge b-ask">📣 지시</span></td><td>프로젝트 시작: 플러그인 탐색 / dailyapp 폴더 / 카우보이 게임 / GitHub 커밋·푸시 / ntfy / 멈추지말기 / 디자인 / Android→iOS→Web / 세션기억</td></tr>
-          <tr><td class="time">04:15</td><td><span class="badge b-do">✅ 수행</span></td><td>환경 점검, 플러그인 조사, dailyapp 폴더, 메모리 저장, ntfy 연결, 세팅 질문</td></tr>
-          <tr class="ask"><td class="time">04:24</td><td><span class="badge b-ask">📣 정정</span></td><td>플러그인 = 앱·웹 전용 최신·최인기로</td></tr>
-          <tr><td class="time">04:27</td><td><span class="badge b-do">✅ 수행</span></td><td>frontend-design 채택. 스캐폴드 + 게임로직/CPU + 테스트 11/11</td></tr>
-          <tr class="ask"><td class="time">04:30</td><td><span class="badge b-ask">📣 지시</span></td><td>멀티플레이 / 질문은 ntfy로, 대기 말기</td></tr>
-          <tr class="ask"><td class="time">04:33</td><td><span class="badge b-ask">📣 지시</span></td><td>작업 DAG + 이벤트 추적 HTML, 틈틈이 갱신</td></tr>
-          <tr><td class="time">04:34</td><td><span class="badge b-do">✅ 수행</span></td><td>이 대시보드 생성. 멀티 방식 ntfy 질문</td></tr>
-          <tr class="ask"><td class="time">04:36</td><td><span class="badge b-ask">📣 지시</span></td><td>오프라인 먼저 / vs CPU / 2인전 제거 / Firebase·WebRTC 질문</td></tr>
-          <tr><td class="time">04:38</td><td><span class="badge b-do">✅ 수행</span></td><td>비용/구조 설명. UI(홈·vsCPU·방법), 2인전 제거</td></tr>
-          <tr class="ask"><td class="time">04:40</td><td><span class="badge b-ask">📣 지시</span></td><td>Firebase 새 프로젝트 / 디자인 예쁘게 + 게임디자인 플러그인</td></tr>
-          <tr><td class="time">04:42</td><td><span class="badge b-do">✅ 수행</span></td><td>디자인 업그레이드(폰트·사막배경·애니). Firebase CLI 설치</td></tr>
-          <tr><td class="time">04:46</td><td><span class="badge b-do">✅ 수행</span></td><td>analyze 0 issue, 테스트 12/12. <b>GitHub repo 생성·푸시</b></td></tr>
-          <tr class="ask"><td class="time">04:47</td><td><span class="badge b-ask">📣 지시</span></td><td>Firebase 로그인 완료 / progress에 지시+수행 둘 다 기록 / 메모리 저장</td></tr>
-          <tr><td class="time">04:48</td><td><span class="badge b-do">✅ 수행</span></td><td>새 Firebase 프로젝트 생성. 로깅 규칙 메모리화</td></tr>
-          <tr><td class="time">04:51</td><td><span class="badge b-do">✅ 수행</span></td><td><b>APK 빌드</b>, <b>웹 GitHub Pages LIVE</b>. 오프라인 출시 완료 🎉</td></tr>
-          <tr class="ask"><td class="time">04:53</td><td><span class="badge b-ask">📣 지시</span></td><td>ntfy로 대시보드를 폰에서 보고싶다</td></tr>
-          <tr><td class="time">04:54</td><td><span class="badge b-do">✅ 수행</span></td><td>대시보드 GitHub Pages 호스팅 + ntfy 링크 (이 페이지!)</td></tr>
-          <tr><td class="time">04:55</td><td><span class="badge b-do">✅ 수행</span></td><td>온라인 방코드 대전 코드 작성·테스트·커밋</td></tr>
-          <tr class="ask"><td class="time">05:00</td><td><span class="badge b-ask">📣 지시</span></td><td>RTDB 테스트 모드로 생성 완료</td></tr>
-          <tr><td class="time">05:02</td><td><span class="badge b-do">✅ 수행</span></td><td>DB URL 주입(asia-southeast1), <b>웹+APK 온라인 빌드 재배포</b>. 온라인 대전 LIVE 🎉</td></tr>
+          <tr><td>ntfy</td><td>알림 전송 시 <code>invalid Control characters</code></td><td>헤더(Title/Tags)에 한글 → <span class="pill p-fix">FIX</span> 헤더는 ASCII만, 본문은 UTF-8 바이트로 전송</td></tr>
+          <tr><td>Android SDK</td><td>cmdline-tools 다운로드 <code>404</code></td><td>버전 URL 만료 + 파일명 오타(commandline-tools→<b>commandlinetools</b>) → <span class="pill p-fix">FIX</span> developer.android.com에서 현재 URL 확인</td></tr>
+          <tr><td>Flutter</td><td><code>flutter test</code> "test directory not found"</td><td>잘못된 작업 디렉토리에서 실행 → <span class="pill p-fix">FIX</span> 앱 폴더에서 실행(Set-Location)</td></tr>
+          <tr><td>설치 자동화</td><td>sdkmanager/firebase init이 백그라운드에서 멈춤</td><td>인터랙티브 라이선스/프롬프트 → <span class="pill p-fix">FIX</span> 파일 redirect(<code>&lt; yes.txt</code>) 또는 콘솔 1클릭</td></tr>
+          <tr><td>폰트</td><td>한글 타이틀이 깨짐(두부)</td><td>웨스턴 폰트(Rye)는 한글 글리프 없음 → <span class="pill p-fix">FIX</span> 한글=Black Han Sans/Noto Sans KR, 영문·숫자만 웨스턴</td></tr>
+          <tr><td>환경</td><td>받지 않아도 될 Android SDK를 또 받음</td><td>이미 Android Studio SDK 존재 → <span class="pill p-fix">FIX</span> 작업 전 <code>flutter doctor</code> 먼저</td></tr>
+          <tr><td>Firebase</td><td>RTDB <code>database:instances:create</code> 실패</td><td>기본 인스턴스 미생성, CLU 자동화 까다로움 → <span class="pill p-fix">FIX</span> 콘솔 "테스트 모드" 1클릭(30일 오픈 규칙)</td></tr>
+          <tr><td>Git</td><td>기여자가 joy / Claude로 잘못 표기</td><td>로컬 user.email 오설정 + Co-Authored-By → <span class="pill p-fix">FIX</span> global=doonghwi&lt;ehdgnlans@gmail.com&gt;, filter-branch 재작성, Claude 트레일러 금지</td></tr>
+          <tr><td>Repo 위생</td><td><code>.omc</code> 세션 상태가 커밋됨</td><td>cwd 기반 상태파일 → <span class="pill p-fix">FIX</span> <code>.gitignore</code>에 <code>.omc/</code></td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
+  <!-- ===== PLUGIN / TOOL EFFICIENCY ===== -->
   <section>
-    <h2>🎯 다음 단계</h2>
+    <h2>🔌 플러그인 · 도구 효율 비교</h2>
+    <p class="hint">무엇을 썼고 얼마나 효율적이었는지 누적 비교 → 다음 앱은 더 빠르게.</p>
+    <div class="panel">
+      <table>
+        <thead><tr><th>도구/플러그인</th><th>용도</th><th>효율</th><th>메모</th></tr></thead>
+        <tbody>
+          <tr><td>Flutter 3.44</td><td>웹+안드로이드 단일 코드베이스</td><td class="stars">★★★★★</td><td>한 코드로 웹/APK 동시. 핵심 선택. iOS도 동일코드(맥 필요)</td></tr>
+          <tr><td>ntfy</td><td>비동기 알림(결정·완료)</td><td class="stars">★★★★★</td><td>자리 비운 사이 진행 알림. 헤더 ASCII 주의</td></tr>
+          <tr><td>flutterfire_cli + firebase_*</td><td>온라인 백엔드 연동</td><td class="stars">★★★★☆</td><td>configure가 옵션 자동주입. 단 RTDB 첫 인스턴스는 콘솔 수동</td></tr>
+          <tr><td>frontend-design (공식)</td><td>UI 디자인 방향</td><td class="stars">★★★★☆</td><td>원칙만 적용(미설치). 뻔한 AI UI 탈피에 유용</td></tr>
+          <tr><td>GitHub Pages</td><td>웹 호스팅(무료)</td><td class="stars">★★★★★</td><td>gh-pages 브랜치 푸시 → 즉시 라이브. base-href 주의</td></tr>
+          <tr><td>기존 Android Studio SDK 재활용</td><td>APK 로컬 빌드</td><td class="stars">★★★★☆</td><td>JDK/SDK 새로 안 받아도 됨. 라이선스 수락만</td></tr>
+          <tr><td>Superpowers / flow-next</td><td>(후보) 워크플로 자동화</td><td class="stars">☆☆☆☆☆</td><td>범주 달라 미사용. 추후 비교 예정</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== PRINCIPLES ===== -->
+  <section>
+    <h2>🧭 방법론 원칙 (체크리스트)</h2>
     <div class="panel">
       <ol style="margin:0;padding-left:20px">
-        <li>✅ <s>웹 배포</s> · ✅ <s>APK</s> · ✅ <s>온라인 방코드 대전</s> — Day 1 완료</li>
-        <li>(추후) Mac 환경에서 iOS 버전 빌드</li>
-        <li>(추후) RTDB 테스트모드 30일 만료 전 정식 보안규칙 적용</li>
+        <li>새 앱 시작 전 <b><code>flutter doctor</code></b>로 환경 먼저 점검(중복 설치 방지).</li>
+        <li>핵심 로직은 <b>순수 함수 + 단위 테스트</b>부터(게임 규칙 등) → UI는 그 위에.</li>
+        <li>오프라인/기본 기능 먼저 출시 → 온라인 등 백엔드는 그 다음 레이어.</li>
+        <li>설치/배포의 인터랙티브 단계는 <b>파일 redirect</b> 또는 사용자 1클릭으로 우회, 멈추지 말 것.</li>
+        <li>커밋 신원은 항상 <b>doonghwi &lt;ehdgnlans@gmail.com&gt;</b>, Co-Authored-By 금지.</li>
+        <li>사용자 지시 + 수행을 <b>앱별 로그</b>에 즉시 기록(휘발 방지).</li>
+        <li>읽기용 산출물은 <b>HTML</b>로, ntfy로는 호스팅 링크 전달.</li>
       </ol>
     </div>
   </section>
 
-  <footer>🤖 Claude Code가 자동 생성·갱신 · 카우보이 듀얼 (장전 · 방어 · 빵야!)</footer>
+  <footer>🤖 doonghwi의 "하루에 앱 하나" 메타 대시보드 · 사용량은 Firebase 실시간 · 함정·플러그인 로그는 앱마다 누적</footer>
 </div>
-<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables:{fontFamily:'Segoe UI'}});</script>
+
+<script>
+// ----- 앱 레지스트리 (새 앱 추가 시 여기에 한 줄) -----
+const APPS = [
+  {
+    id: 'cowboy_duel', day: 'Day 1', name: '🤠 카우보이 듀얼',
+    desc: '장전·방어·빵야 + 카우보이 반응 대결',
+    platforms: [['웹','c-web'],['안드로이드','c-and'],['온라인','c-on']],
+    links: [
+      ['플레이','https://doonghwi.github.io/cowboy-duel/'],
+      ['소스','https://github.com/doonghwi/cowboy-duel'],
+      ['빌드로그','cowboy-duel.html']
+    ]
+  }
+];
+const STATS_URL = 'https://cowboy-duel-doonghwi-default-rtdb.asia-southeast1.firebasedatabase.app/stats.json';
+const LAUNCH_THRESHOLD = 50; // 이 이상이면 "출시 후보"
+
+function fmtAgo(ts){
+  if(!ts) return '아직 사용 기록 없음';
+  const d = Date.now() - ts; const m = Math.floor(d/60000);
+  if(m<1) return '방금 전'; if(m<60) return m+'분 전';
+  const h=Math.floor(m/60); if(h<24) return h+'시간 전';
+  return Math.floor(h/24)+'일 전';
+}
+
+function render(stats){
+  const root = document.getElementById('apps');
+  root.innerHTML = '';
+  for(const app of APPS){
+    const s = (stats && stats[app.id]) || {};
+    const opens = s.opens || 0;
+    const cand = opens >= LAUNCH_THRESHOLD;
+    const chips = app.platforms.map(p=>`<span class="chip ${p[1]}">${p[0]}</span>`).join('');
+    const links = app.links.map(l=>`<a href="${l[1]}">${l[0]}</a>`).join('');
+    root.insertAdjacentHTML('beforeend', `
+      <div class="app">
+        <div class="day">${app.day}</div>
+        <h3>${app.name}</h3>
+        <div class="sub2">${app.desc}</div>
+        <div class="chips">${chips}</div>
+        <div class="usage"><span class="big">${opens.toLocaleString()}</span><span class="lab">번 열림</span></div>
+        <div class="sub2">웹 ${s.opens_web||0} · 안드로이드 ${s.opens_android||0} · 최근 ${fmtAgo(s.lastOpen)}</div>
+        <div class="applinks">${links}</div>
+        <div class="cand ${cand?'yes':'no'}">${cand?'🚀 출시 후보 (사용량 충분)':'📈 관찰 중 ('+LAUNCH_THRESHOLD+'회+ 시 후보)'}</div>
+      </div>`);
+  }
+}
+
+render(null); // 먼저 0으로 그리고
+fetch(STATS_URL).then(r=>r.json()).then(render).catch(()=>{});
+</script>
 </body>
 </html>

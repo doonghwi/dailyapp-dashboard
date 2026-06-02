@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🤠 카우보이 듀얼 — 빌드 로그</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  :root{--sand:#e8d5a8;--parch:#f5ead0;--leather:#3b2412;--rust:#c8541e;--danger:#9e2b25;--sage:#2e6e5a;--gold:#d9a441;--ink:#241a12;--muted:#7a6748;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:radial-gradient(circle at 50% -10%,#f7eccf 0%,#e8d5a8 60%,#ddc792 100%);color:var(--ink);line-height:1.5;min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
+  a.back{display:inline-block;margin-bottom:10px;color:var(--rust);text-decoration:none;font-weight:700}
+  header{text-align:center;border-bottom:4px double var(--leather);padding-bottom:16px}
+  h1{font-size:1.9rem;margin:.2em 0;letter-spacing:1px}
+  h1 .sub{display:block;font-size:.9rem;font-weight:400;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:6px}
+  .updated{font-size:.82rem;color:var(--muted)}
+  .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.74rem;font-weight:800;color:#fff;white-space:nowrap}
+  .b-ask{background:var(--rust)} .b-do{background:var(--sage)}
+  section{margin-top:30px}
+  h2{font-size:1.25rem;border-left:6px solid var(--rust);padding-left:12px;margin-bottom:14px}
+  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
+  .links a{background:var(--leather);color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:.85rem;font-weight:700}
+  .panel{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:16px;overflow:auto}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e0cfa0;vertical-align:top}
+  th{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:1px}
+  td.time{white-space:nowrap;color:var(--muted)}
+  tr.ask{background:#fbf0db}
+  .mermaid{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:14px}
+  code{background:#efe2c2;padding:1px 5px;border-radius:5px;font-size:.86em}
+  footer{margin-top:36px;text-align:center;color:var(--muted);font-size:.78rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← DailyApp 대시보드로</a>
+  <header>
+    <h1>🤠 카우보이 듀얼 <span class="sub">Day 1 · Flutter · 빌드 로그</span></h1>
+    <div class="updated">Firebase: <code>cowboy-duel-doonghwi</code></div>
+    <div class="links">
+      <a href="https://doonghwi.github.io/cowboy-duel/">🎮 웹에서 플레이</a>
+      <a href="https://github.com/doonghwi/cowboy-duel">💾 소스 (GitHub)</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>🗺️ 작업 DAG</h2>
+    <pre class="mermaid">
+flowchart TD
+  classDef done fill:#2e6e5a,stroke:#1e4a3c,color:#fff;
+  subgraph A[A. 환경 세팅]
+    A1[Flutter/JDK/AndroidSDK]:::done
+    A2[gh + Firebase CLI + 로그인]:::done
+    A3[메모리/세션기억]:::done
+    A4[ntfy 알림]:::done
+  end
+  subgraph B[B. 게임 빌드]
+    B1[로직 + 테스트 12/12]:::done --> B2[CPU AI]:::done
+    B1 --> B3[디자인: 폰트·사막·애니]:::done
+    B3 --> B4[vs CPU + 카우보이 연출]:::done
+    B3 --> B5[게임 방법]:::done
+  end
+  subgraph C[C. 배포 / 버전관리]
+    C1[GitHub repo]:::done
+    C2[웹 GitHub Pages LIVE]:::done
+    C3[안드로이드 APK]:::done
+  end
+  subgraph D[D. 온라인 멀티 LIVE]
+    D1[Firebase + flutterfire]:::done
+    D2[방코드 대전 코드]:::done
+    D3[RTDB 인스턴스]:::done
+    D4[온라인 빌드·배포]:::done
+  end
+  B4 --> C2
+  C1 --> C2
+  C1 --> C3
+  D1 --> D2 --> D3 --> D4
+    </pre>
+  </section>
+
+  <section>
+    <h2>📜 작업 로그 — 시킨 일(📣) & 한 일(✅)</h2>
+    <div class="panel">
+      <table>
+        <thead><tr><th>시각</th><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr class="ask"><td class="time">04:10</td><td><span class="badge b-ask">📣 지시</span></td><td>프로젝트 시작: 플러그인 탐색 / dailyapp 폴더 / 카우보이 게임 / GitHub / ntfy / 멈추지말기 / 디자인 / Android→iOS→Web / 세션기억</td></tr>
+          <tr><td class="time">04:27</td><td><span class="badge b-do">✅ 수행</span></td><td>frontend-design 채택. 스캐폴드 + 게임로직/CPU + 테스트 11/11</td></tr>
+          <tr class="ask"><td class="time">04:36</td><td><span class="badge b-ask">📣 지시</span></td><td>오프라인 먼저 / vs CPU / 2인전 제거 / Firebase 새 프로젝트 / 디자인 예쁘게</td></tr>
+          <tr><td class="time">04:42</td><td><span class="badge b-do">✅ 수행</span></td><td>디자인 업그레이드(폰트·사막배경·애니). UI(홈·vsCPU·방법)</td></tr>
+          <tr><td class="time">04:51</td><td><span class="badge b-do">✅ 수행</span></td><td>analyze 0 issue, 테스트 12/12. GitHub repo·푸시. <b>APK + 웹 GitHub Pages LIVE</b></td></tr>
+          <tr><td class="time">04:55</td><td><span class="badge b-do">✅ 수행</span></td><td>온라인 방코드 대전 코드 작성·테스트·커밋</td></tr>
+          <tr><td class="time">05:02</td><td><span class="badge b-do">✅ 수행</span></td><td>RTDB 연결(asia-southeast1), 웹+APK 온라인 재배포. <b>온라인 대전 LIVE</b></td></tr>
+          <tr><td class="time">05:1x</td><td><span class="badge b-do">✅ 수행</span></td><td>git 신원 doonghwi 단독 정정, 사용량 카운터 추가, 메타 대시보드 구성</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>🤖 Claude Code가 자동 생성·갱신 · 카우보이 듀얼 (장전 · 방어 · 빵야!)</footer>
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables:{fontFamily:'Segoe UI'}});</script>
+</body>
+</html>
