@@ -97,6 +97,8 @@ flowchart TD
           <tr><td class="time">05:2x</td><td><span class="badge b-do">✅ 수행</span></td><td>폰트 5종 앱 내장(런타임 fetch 제거)→깜빡임 해결, 코드 placeholder 연하게, 안드로이드 오프라인 지속성</td></tr>
           <tr class="ask"><td class="time">05:3x</td><td><span class="badge b-ask">📣 피드백</span></td><td>아이콘이 밋밋함, 예전 이모지가 더 예쁨. 에뮬레이터로 직접 테스트/검토해달라</td></tr>
           <tr><td class="time">05:4x</td><td><span class="badge b-do">✅ 수행</span></td><td>이모지를 <b>Twemoji 이미지로 앱 내장</b>(예쁨+즉시표시). <b>안드로이드 에뮬레이터(WHPX) 부팅→APK 설치→스크린샷 직접 검토</b>로 홈·게임플레이·게임방법 전수 확인 OK. 웹+APK 재배포</td></tr>
+          <tr class="ask"><td class="time">06:0x</td><td><span class="badge b-ask">📣 피드백</span></td><td>온라인 대전: 장전/방어 눌러도 무반응, 대기 피드백도 없어 답답함</td></tr>
+          <tr><td class="time">06:1x</td><td><span class="badge b-do">✅ 수행</span></td><td>원인=Firebase 숫자키→배열 함정으로 화면 멈춤. <b>턴 키를 t0,t1…로 변경</b>+List 안전파싱+try/catch+"내 선택/상대 대기중" 피드백. <b>에뮬+REST로 가짜 상대 시뮬레이션해 끝까지 검증</b>(둘 다 장전→총알+1→빵야 활성). 재배포</td></tr>
         </tbody>
       </table>
     </div>
