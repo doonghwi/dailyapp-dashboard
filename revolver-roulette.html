@@ -124,6 +124,9 @@ flowchart TD
           <tr class="ask"><td class="time">Day 2</td><td><span class="badge b-ask">📣 피드백</span></td><td>여전히 <b>웹에서 소리 안 남</b>(처음 짤깍 후 무음) · "뭐가 완벽이냐"</td></tr>
           <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td><b>거짓양성 규명</b> — Playwright로 <b>실제 출력 RMS 측정</b>: UrlSource로 <code>_Namespace</code>는 풀렸지만 <code>play()</code> promise만 OK였고 audioplayers가 web에서 <b>자체 AudioContext(suspended)</b>로 출력해 실제론 무음(RMS=0). <code>createMediaElementSource ... already connected</code> 단서로 확인. "promise OK ≠ 들림"</td></tr>
           <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td><b>웹 오디오 직접 구현(최종 해결)</b> — audioplayers를 web에서 버리고 <b>단일 AudioContext + decodeAudioData + AudioBufferSource</b> 엔진 자작(<code>sfx_web.dart</code>, 조건부 import로 mobile은 audioplayers 유지). 컨텍스트 1개를 첫 탭에 resume→영구 running, 매 재생은 새 BufferSource(반복·연타 OK). <b>실제 RMS≈0.2로 audible 검증</b>(suspended→running). 웹/APK 재배포</td></tr>
+          <tr class="ask"><td class="time">Day 2</td><td><span class="badge b-ask">📣 피드백</span></td><td>기능·회전음 만족 👍 / <b>총소리 더 강하고 무섭게(팡 터지듯 놀라도록)</b> / <b>세로(portrait)로 90도 돌려라</b> — 51·62·73·84 배치(총신 수직, 총구 아래)·화면비율도 세로</td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td><b>총소리 강화</b> — mixkit 녹음에 0ms 풀스케일 임팩트(놀람)+서브베이스 boom+저음바디+soft-clip 펀치+다크 리버브 tail 레이어(numpy/scipy). RMS로 강도 확인(명중 탭 0.39 vs 일반 0.2)</td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td><b>세로 모드 전환</b> — orientation portrait, CustomPaint를 90° 시계회전(총신 수직·총구 우하단·손잡이 좌상단), 화면 fit를 세로 비율로 재계산. 에뮬 세로 스크린샷으로 배치·명중 검증. 웹/APK(v1.2.0) 재배포</td></tr>
         </tbody>
       </table>
     </div>
