@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🔫 리볼버 룰렛 — 빌드 로그</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  :root{--sand:#e8d5a8;--parch:#f5ead0;--leather:#3b2412;--rust:#c8541e;--danger:#9e2b25;--sage:#2e6e5a;--gold:#d9a441;--ink:#241a12;--muted:#7a6748;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:radial-gradient(circle at 50% -10%,#f7eccf 0%,#e8d5a8 60%,#ddc792 100%);color:var(--ink);line-height:1.5;min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
+  a.back{display:inline-block;margin-bottom:10px;color:var(--rust);text-decoration:none;font-weight:700}
+  header{text-align:center;border-bottom:4px double var(--leather);padding-bottom:16px}
+  h1{font-size:1.9rem;margin:.2em 0;letter-spacing:1px}
+  h1 .sub{display:block;font-size:.9rem;font-weight:400;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:6px}
+  .updated{font-size:.82rem;color:var(--muted)}
+  .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.74rem;font-weight:800;color:#fff;white-space:nowrap}
+  .b-ask{background:var(--rust)} .b-do{background:var(--sage)}
+  section{margin-top:30px}
+  h2{font-size:1.25rem;border-left:6px solid var(--rust);padding-left:12px;margin-bottom:14px}
+  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
+  .links a{background:var(--leather);color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:.85rem;font-weight:700}
+  .panel{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:16px;overflow:auto}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e0cfa0;vertical-align:top}
+  th{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:1px}
+  td.time{white-space:nowrap;color:var(--muted)}
+  tr.ask{background:#fbf0db}
+  .mermaid{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:14px}
+  code{background:#efe2c2;padding:1px 5px;border-radius:5px;font-size:.86em}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:8px}
+  .card{background:var(--parch);border:1px solid #d8c08a;border-radius:12px;padding:14px;box-shadow:0 2px 0 #d8c08a}
+  .card .n{font-size:1.5rem;font-weight:800;color:var(--leather)}
+  .card .l{font-size:.8rem;color:var(--muted)}
+  footer{margin-top:36px;text-align:center;color:var(--muted);font-size:.78rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← DailyApp 대시보드로</a>
+  <header>
+    <h1>🔫 리볼버 룰렛 <span class="sub">Day 2 · Flutter · 오프라인 · 빌드 로그</span></h1>
+    <div class="updated">패키지 <code>com.doonghwi.revolver_roulette</code> · 백엔드 없음(오프라인)</div>
+    <div class="links">
+      <a href="https://doonghwi.github.io/revolver-roulette/">🎮 웹에서 플레이</a>
+      <a href="https://github.com/doonghwi/revolver-roulette">💾 소스 (GitHub)</a>
+      <a href="https://github.com/doonghwi/revolver-roulette/releases/tag/v1.0.0">📱 APK v1.0.0</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>📊 한눈에 보기</h2>
+    <div class="cards">
+      <div class="card"><div class="n">2/2</div><div class="l">테스트 통과 (analyze 0 issue)</div></div>
+      <div class="card"><div class="n">LIVE</div><div class="l">웹 GitHub Pages (HTTP 200)</div></div>
+      <div class="card"><div class="n">44MB</div><div class="l">안드로이드 APK (릴리스)</div></div>
+      <div class="card"><div class="n">0</div><div class="l">외부 에셋·백엔드 (전부 자작)</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🗺️ 작업 DAG</h2>
+    <pre class="mermaid">
+flowchart TD
+  classDef done fill:#2e6e5a,stroke:#1e4a3c,color:#fff;
+  subgraph A[A. 준비]
+    A1[Flutter create<br/>android+web]:::done
+    A2[가로 고정 + 몰입형]:::done
+  end
+  subgraph B[B. 에셋 자작]
+    B1[사운드 Python 합성<br/>회전음·총소리]:::done
+    B2[리볼버 CustomPaint<br/>측면·우하향]:::done
+    B3[아이콘 Pillow<br/>6연발 실린더]:::done
+  end
+  subgraph C[C. 게임]
+    C1[상태머신<br/>ready/spin/dead]:::done
+    C2[가로 발사 카운터]:::done
+    C3[탭 표시 + 회전 애니]:::done
+    C4[명중: 빨간화면+BANG]:::done
+  end
+  subgraph D[D. 검증/배포]
+    D1[analyze 0 · test 2/2]:::done
+    D2[에뮬 설치·스크린샷 검증]:::done
+    D3[웹 Pages LIVE]:::done
+    D4[APK 릴리스 v1.0.0]:::done
+  end
+  A1 --> B1 --> C1
+  A1 --> B2 --> C3
+  B3 --> D4
+  A2 --> C2
+  C1 --> C4
+  C4 --> D1 --> D2 --> D3
+  D2 --> D4
+    </pre>
+  </section>
+
+  <section>
+    <h2>📜 작업 로그 — 시킨 일(📣) & 한 일(✅)</h2>
+    <div class="panel">
+      <table>
+        <thead><tr><th>시각</th><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr class="ask"><td class="time">Day 2</td><td><span class="badge b-ask">📣 지시</span></td><td><code>roulette_spec.md</code> 기반 새 <b>오프라인</b> 앱 / 새 폴더·repo·Pages / Firebase 불필요 / git doonghwi(Claude표기X) / ntfy 알림 / <b>가로 기본</b>·측면 리볼버(우하향)·탭표시·가로 카운터·<b>사운드</b>·명중시 빨간화면 / 에뮬 스크린샷 검증 + <code>--pwa-strategy=none</code> 배포 / 완성까지 멈추지 말 것</td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td>환경 확인(Flutter 3.44, gh=doonghwi). <code>flutter create</code>(android+web), 패키지 <code>com.doonghwi.revolver_roulette</code>. ntfy 시작 알림</td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td><b>사운드 자체 합성</b> — 순수 Python <code>wave</code>로 실린더 회전음(감속 클릭열)·총소리(노이즈 크랙+저음 스윕)·공이치기 클릭 생성(저작권0). <code>audioplayers</code> 연결</td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td><b>리볼버 측면도 CustomPaint 자작</b> — 실린더(6칸)·총열·나무 손잡이·방아쇠울·공이. Canvas를 0.42rad 회전해 <b>총구 우하향</b>. 실린더 회전 애니메이션</td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td>게임 상태머신(ready→spinning→dead). 가로 발사 카운터(●●○○○○+숫자), "여기 탭" 펄스 표시. 생존=회전음+회전+카운트, 명중=총소리+<b>빨간 RadialGradient 플래시</b>+흔들림+BANG+실탄노출+재장전. 아이콘(Pillow)·런처아이콘 생성</td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td><code>flutter analyze</code> 0 issue, 위젯 테스트 2/2 통과. <b>안드로이드 에뮬에 APK 설치→스크린샷</b>으로 준비·생존(회전)·명중(빨간화면) 직접 검증</td></tr>
+          <tr class="ask"><td class="time">Day 2</td><td><span class="badge b-ask">📣 피드백</span></td><td>한글로 보고 / 결정 필요하면 ntfy / <b>소리와 사진(시각)이 중요한 프로젝트</b></td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td>명중 연출 강화 — 방사형 빨간 플래시(즉발→감쇠), 팝업 BANG 오버레이, 흔들림 증가. 재빌드·에뮬 재검증(빨간화면+BANG 스크린샷 확보)</td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td>git 커밋(doonghwi 단독). <b>GitHub repo 생성·푸시</b>. <b>웹 Pages LIVE</b>(gh-pages, <code>--pwa-strategy=none</code>, base-href, HTTP 200). <b>APK 릴리스 v1.0.0</b>. ntfy 완료 알림. 메모리·보고서(REPORT.html) 작성</td></tr>
+          <tr class="ask"><td class="time">Day 2</td><td><span class="badge b-ask">📣 지시</span></td><td>중앙 대시보드(<code>dailyapp-dashboard</code>)에 <b>실시간으로 반영</b></td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td>허브 앱 레지스트리에 리볼버 추가(오프라인 카드), 함정·플러그인 로그 갱신, 이 빌드로그 페이지 생성 → <b>main 푸시로 Pages 실시간 갱신</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>🤖 Claude Code가 자동 생성·갱신 · 리볼버 룰렛 (탭 · 회전 · 빵야!)</footer>
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables:{fontFamily:'Segoe UI'}});</script>
+</body>
+</html>
