@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🎲 DailyApp 진행 대시보드 — 주사위 5개 집계</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  :root{
+    --felt:#0e5b45; --felt2:#063528; --ivory:#f6f1e7; --brass:#e7b85c;
+    --brassdeep:#b8862f; --danger:#e0654e; --ink:#0c241c; --muted:#9fc3b3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;
+    background:linear-gradient(160deg,#0e5b45 0%,#063528 70%);
+    color:var(--ivory);line-height:1.55;min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 80px}
+  header{text-align:center;border-bottom:3px double var(--brass);padding-bottom:18px}
+  h1{font-size:2.1rem;margin:.2em 0;letter-spacing:1px}
+  h1 .sub{display:block;font-size:.92rem;font-weight:400;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:6px}
+  .updated{font-size:.85rem;color:var(--muted)}
+  .updated a{color:var(--brass);text-decoration:none}
+  .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.74rem;font-weight:800;color:#06281e;white-space:nowrap}
+  .b-ask{background:var(--danger);color:#fff} .b-do{background:var(--brass)} .b-prog{background:#7bc47f}
+  section{margin-top:34px}
+  h2{font-size:1.3rem;border-left:6px solid var(--brass);padding-left:12px;margin-bottom:14px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+  .card{background:rgba(255,255,255,.06);border:1px solid rgba(231,184,92,.3);border-radius:12px;padding:14px}
+  .card .n{font-size:1.5rem;font-weight:800;color:var(--brass)}
+  .card .l{font-size:.82rem;color:var(--muted)}
+  .panel{background:rgba(255,255,255,.05);border:1px solid rgba(231,184,92,.25);border-radius:14px;padding:18px;overflow:auto}
+  table{width:100%;border-collapse:collapse;font-size:.92rem}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(231,184,92,.18);vertical-align:top}
+  th{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:1px}
+  td.time{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
+  tr.ask{background:rgba(224,101,78,.12)}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .d-done{background:var(--brass)} .d-prog{background:#7bc47f} .d-todo{background:#5a7e70}
+  .legend{font-size:.85rem;color:var(--muted);margin-top:10px}
+  .legend span{margin-right:16px}
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .shots figure{margin:0;background:rgba(0,0,0,.2);border-radius:12px;padding:8px;text-align:center}
+  .shots img{width:100%;border-radius:8px;border:1px solid rgba(231,184,92,.3)}
+  .shots figcaption{font-size:.78rem;color:var(--muted);margin-top:6px}
+  footer{margin-top:40px;text-align:center;color:var(--muted);font-size:.8rem}
+  .mermaid{background:rgba(255,255,255,.05);border:1px solid rgba(231,184,92,.25);border-radius:14px;padding:18px}
+  code{background:rgba(0,0,0,.3);padding:1px 6px;border-radius:5px;font-size:.86em;color:var(--brass)}
+  a.btn{display:inline-block;background:var(--brass);color:#06281e;font-weight:800;
+    padding:8px 16px;border-radius:10px;text-decoration:none;margin:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎲 주사위 5개 집계 <span class="sub">DailyApp · Day 2 · Flutter (Android · Web) · 오프라인</span></h1>
+    <div class="updated">
+      마지막 업데이트: <strong>2026-06-02 18:10</strong> ·
+      저장소: <a href="https://github.com/doonghwi/five-dice">github.com/doonghwi/five-dice</a> ·
+      웹: <a href="https://doonghwi.github.io/five-dice/">doonghwi.github.io/five-dice</a>
+    </div>
+    <div style="margin-top:12px">
+      <a class="btn" href="https://doonghwi.github.io/five-dice/">▶ 웹에서 바로 플레이</a>
+      <a class="btn" href="https://github.com/doonghwi/five-dice">소스 보기</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>📊 한눈에 보기</h2>
+    <div class="cards">
+      <div class="card"><div class="n">3/3</div><div class="l">게임 로직 테스트 통과 (analyze 0 issue)</div></div>
+      <div class="card"><div class="n">완료</div><div class="l">에뮬레이터 전 플로우 검증</div></div>
+      <div class="card"><div class="n">LIVE</div><div class="l">웹 GitHub Pages (HTTP 200)</div></div>
+      <div class="card"><div class="n">완료</div><div class="l">안드로이드 APK</div></div>
+      <div class="card"><div class="n">오프라인</div><div class="l">Firebase 불필요 · 패스앤플레이</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🎮 게임 규칙</h2>
+    <div class="panel">
+      <ol style="margin:0;padding-left:20px">
+        <li>시작 화면에서 <b>참가 인원 n명</b>(2~12)을 정한다.</li>
+        <li>순서대로: 각 플레이어가 <b>"주사위 굴리기"</b> → 자기 5개 주사위를 본다.</li>
+        <li><b>"가리기"</b>를 누르면 가려지고 다음 사람으로 넘어간다(프라이버시).</li>
+        <li>마지막 플레이어가 가리면 <b>"결과 확인"</b> 버튼 등장.</li>
+        <li>전체 <b>n×5개</b> 주사위 중 <b>1~6 눈이 각각 몇 개</b>인지 막대그래프로 집계.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h2>🗺️ 작업 DAG (의존 관계)</h2>
+    <pre class="mermaid">
+flowchart TD
+  classDef done fill:#e7b85c,stroke:#b8862f,color:#06281e;
+  classDef prog fill:#7bc47f,stroke:#4e8a52,color:#06281e;
+  classDef todo fill:#19463a,stroke:#5a7e70,color:#cfe3da;
+
+  subgraph A[A. 준비]
+    A1[메모리: dailyapp 워크플로 로드]:::done
+    A2[Flutter 3.44 / git / gh 확인]:::done
+    A3[새 폴더 five_dice 스캐폴드]:::done
+  end
+  subgraph B[B. 빌드]
+    B1[테마/펠트 디자인]:::done --> B2[커스텀 페인트 주사위]:::done
+    B2 --> B3[게임 상태/페이즈 로직]:::done
+    B3 --> B4[셋업/플레이/결과 화면]:::done
+    B3 --> B5[단위 테스트 3건]:::done
+    B2 --> B6[자작 주사위 아이콘]:::done
+  end
+  subgraph C[C. 검증]
+    C1[flutter analyze 0 issue]:::done
+    C2[APK 에뮬 설치]:::done --> C3[전 플로우 스크린샷 검증]:::done
+  end
+  subgraph D[D. 배포]
+    D1[git + GitHub repo]:::done
+    D2[웹 → GitHub Pages LIVE]:::done
+    D3[APK 산출물]:::done
+  end
+  A3 --> B1
+  B4 --> C1 --> C2
+  C3 --> D2
+  B5 --> C1
+  D1 --> D2
+  C2 --> D3
+    </pre>
+    <div class="legend">
+      <span><span class="dot d-done"></span>완료</span>
+      <span><span class="dot d-prog"></span>진행 중</span>
+      <span><span class="dot d-todo"></span>예정</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>📱 에뮬레이터 검증 스크린샷</h2>
+    <div class="shots">
+      <figure><img src="shots/d1_setup.png" alt="셋업"><figcaption>① 인원 선택</figcaption></figure>
+      <figure><img src="shots/d2_beforeroll.png" alt="차례"><figcaption>② 플레이어 차례</figcaption></figure>
+      <figure><img src="shots/d4_revealed.png" alt="굴림"><figcaption>③ 주사위 5개 공개</figcaption></figure>
+      <figure><img src="shots/d6_allhidden.png" alt="완료"><figcaption>④ 전원 완료</figcaption></figure>
+      <figure><img src="shots/d7_result.png" alt="결과"><figcaption>⑤ 전체 집계 결과</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>📜 작업 로그 — 시킨 일(📣) & 한 일(✅)</h2>
+    <div class="panel">
+      <table>
+        <thead><tr><th>시각</th><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr class="ask"><td class="time">17:50</td><td><span class="badge b-ask">📣 지시</span></td><td>dice5_spec.md 기반 <b>오프라인 패스앤플레이 앱</b> 빌드: 새 폴더·새 repo(doonghwi)·새 Pages 도메인 / Firebase 불필요 / git doonghwi, Co-Authored-By 금지 / ntfy 결정 알림 / 에뮬 스크린샷 검증 / 웹 <code>--pwa-strategy=none</code> 배포 / 완성까지 멈추지 말 것</td></tr>
+          <tr><td class="time">17:51</td><td><span class="badge b-do">✅ 수행</span></td><td>spec + 메모리(워크플로/ntfy/git신원/에뮬셀프테스트) 로드. 환경 확인(Flutter 3.44, gh=doonghwi, git 신원 OK). <code>five_dice</code> 스캐폴드(android+web)</td></tr>
+          <tr><td class="time">17:55</td><td><span class="badge b-do">✅ 수행</span></td><td>펠트 테마 + 커스텀 페인트 주사위(폰트/이모지 불필요) + 게임 로직/페이즈 + 셋업·플레이·결과 화면 작성. 단위테스트 3건, <b>analyze 0 issue</b>. 자작 주사위 아이콘(GDI+) 생성</td></tr>
+          <tr><td class="time">17:58</td><td><span class="badge b-do">✅ 수행</span></td><td>git init + <b>GitHub repo <code>five-dice</code> 생성·푸시</b>(author doonghwi). APK 빌드(42.3MB)</td></tr>
+          <tr><td class="time">18:02</td><td><span class="badge b-do">✅ 수행</span></td><td><b>에뮬레이터 전 플로우 검증</b>: 인원3 → 굴리기 → 5개공개 → 가리기 → 다음플레이어 프라이버시 → 전원완료 → 결과집계(합 15개 정확). 스크린샷 7장</td></tr>
+          <tr class="ask"><td class="time">18:03</td><td><span class="badge b-ask">📣 지시</span></td><td>"한글로 말하고, 결정 필요하면 ntfy로 알림 줘"</td></tr>
+          <tr><td class="time">18:05</td><td><span class="badge b-do">✅ 수행</span></td><td>이후 한글 진행. 웹 <code>--pwa-strategy=none</code> 빌드 → <b>gh-pages 배포 LIVE</b>(HTTP 200). 잘못 섞인 소스/.omc 파일 정리해 깨끗한 41파일로 재배포</td></tr>
+          <tr><td class="time">18:10</td><td><span class="badge b-do">✅ 수행</span></td><td>이 대시보드 생성. APK 산출물 복사, ntfy 완료 알림, 메모리 갱신 진행</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>🤖 Claude Code 자동 생성·갱신 대시보드 · 주사위 5개 집계 (굴리기 · 가리기 · 집계!)</footer>
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables:{fontFamily:'Segoe UI', primaryColor:'#0e5b45'}});</script>
+</body>
+</html>

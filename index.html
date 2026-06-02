@@ -83,6 +83,11 @@
           <tr><td>사운드 에셋</td><td>저작권 free 효과음 어디서?</td><td>다운로드 라이선스 추적 번거로움 → <span class="pill p-fix">FIX</span> <b>순수 Python <code>wave</code>로 합성</b>(클릭열=실린더, 노이즈+저음스윕=총소리). 저작권 0, 용량 작음</td></tr>
           <tr><td>audioplayers</td><td>web에서 사운드 경로 404 걱정</td><td><code>AssetSource('sounds/x.wav')</code>는 내부적으로 <code>assets/</code>를 한 번 더 붙임 → 실제 요청은 <code>assets/assets/sounds/x.wav</code> → <span class="pill p-fix">FIX</span> pubspec에 <code>assets/sounds/</code> 선언하면 그 경로로 정상 200</td></tr>
           <tr><td>에뮬 사운드</td><td>에뮬레이터에서 소리 검증 불가</td><td><code>-no-audio</code>로 부팅됨(공용 AVD) → <span class="pill p-fix">FIX</span> logcat에 audioplayers 오류 0 + 웹 에셋 200으로 경로 검증, 청취는 실기기/웹에서</td></tr>
+          <tr><td>Android 권한</td><td>릴리스 APK에서 온라인이 무한 대기(앱은 켜짐)</td><td>Flutter는 <code>INTERNET</code> 권한을 <b>debug/profile 매니페스트에만</b> 넣음 → release엔 없음(Firebase init은 네트워크 불필요라 안 터짐) → <span class="pill p-fix">FIX</span> <code>main/AndroidManifest.xml</code>에 <code>&lt;uses-permission android:name="android.permission.INTERNET"/&gt;</code> 직접 추가</td></tr>
+          <tr><td>Firebase RTDB</td><td>온라인 write가 무한 대기 · "Database lives in a different region"</td><td><code>FirebaseDatabase.instance</code>가 옵션의 regional URL을 무시하고 기본 리전에 붙어 서버가 소켓 강제종료 → <span class="pill p-fix">FIX</span> <code>FirebaseDatabase.instanceFor(app:…, databaseURL:'…asia-southeast1…')</code>로 리전 명시. logcat <code>PersistentConnection</code> 경고로 진단</td></tr>
+          <tr><td>Firebase 온라인</td><td>3인이 다 골라도 "다른 총잡이 기다리는 중 2/3"로 멈춤</td><td>좌석 배정이 전체-노드 트랜잭션+클로저 변수라 반환 좌석≠실제 DB 좌석 → 한 슬롯에 move가 영영 안 들어옴 → <span class="pill p-fix">FIX</span> <b>좌석별(per-seat) 트랜잭션</b>으로 claim하고 좌석은 <b>커밋된 스냅샷</b>에서 도출(게스트 p1/p2)</td></tr>
+          <tr><td>Firebase RTDB</td><td>기본 인스턴스 생성이 CLI로 막힘(콘솔 없이)</td><td><code>database:instances:create</code>가 default 없으면 거부 → <span class="pill p-fix">FIX</span> firebase-tools refresh token으로 access token 발급 후 <b>관리 API</b>(<code>firebasedatabase.googleapis.com …type:DEFAULT_DATABASE</code>) 호출, 규칙은 <code>PUT …/.settings/rules.json</code>. 완전 헤드리스</td></tr>
+          <tr><td>스크린샷 검토</td><td>1080×2340 PNG를 Read하면 거부됨(이미지 多 세션)</td><td>해상도 한도(&gt;2000px) → <span class="pill p-fix">FIX</span> PIL <code>thumbnail((520,1130))</code>로 축소 후 Read</td></tr>
         </tbody>
       </table>
     </div>
@@ -161,7 +166,8 @@ const APPS = [
     platforms: [['웹','c-web'],['안드로이드','c-and'],['오프라인','c-ios']],
     links: [
       ['플레이','https://doonghwi.github.io/five-dice/'],
-      ['소스','https://github.com/doonghwi/five-dice']
+      ['소스','https://github.com/doonghwi/five-dice'],
+      ['빌드로그','five-dice.html']
     ]
   },
   {

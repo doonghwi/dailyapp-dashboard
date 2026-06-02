@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🤠🤠🤠 3인 카우보이 — 빌드 로그</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  :root{--sand:#e8d5a8;--parch:#f5ead0;--leather:#3b2412;--rust:#c8541e;--danger:#9e2b25;--sage:#2e6e5a;--gold:#d9a441;--ink:#241a12;--muted:#7a6748;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:radial-gradient(circle at 50% -10%,#f7eccf 0%,#e8d5a8 60%,#ddc792 100%);color:var(--ink);line-height:1.5;min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
+  a.back{display:inline-block;margin-bottom:10px;color:var(--rust);text-decoration:none;font-weight:700}
+  header{text-align:center;border-bottom:4px double var(--leather);padding-bottom:16px}
+  h1{font-size:1.9rem;margin:.2em 0;letter-spacing:1px}
+  h1 .sub{display:block;font-size:.9rem;font-weight:400;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:6px}
+  .updated{font-size:.82rem;color:var(--muted)}
+  .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.74rem;font-weight:800;color:#fff;white-space:nowrap}
+  .b-ask{background:var(--rust)} .b-do{background:var(--sage)}
+  section{margin-top:30px}
+  h2{font-size:1.25rem;border-left:6px solid var(--rust);padding-left:12px;margin-bottom:14px}
+  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
+  .links a{background:var(--leather);color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:.85rem;font-weight:700}
+  .panel{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:16px;overflow:auto}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e0cfa0;vertical-align:top}
+  th{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:1px}
+  td.time{white-space:nowrap;color:var(--muted)}
+  tr.ask{background:#fbf0db}
+  .mermaid{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:14px}
+  code{background:#efe2c2;padding:1px 5px;border-radius:5px;font-size:.86em}
+  .rule{background:#fbf0db;border:1px solid #e8d39a;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:.9rem}
+  footer{margin-top:36px;text-align:center;color:var(--muted);font-size:.78rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← DailyApp 대시보드로</a>
+  <header>
+    <h1>🤠🤠🤠 3인 카우보이 <span class="sub">Day 3 · Flutter · 빌드 로그</span></h1>
+    <div class="updated">Firebase: <code>cowboy-trio-doonghwi</code> · RTDB asia-southeast1</div>
+    <div class="links">
+      <a href="https://doonghwi.github.io/cowboy-trio/">🎮 웹에서 플레이</a>
+      <a href="https://github.com/doonghwi/cowboy-trio">💾 소스 (GitHub)</a>
+      <a href="https://github.com/doonghwi/cowboy-trio/releases/tag/v1.0.0">📱 APK v1.0.0</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>📜 게임 규칙</h2>
+    <div class="panel">
+      <div class="rule">🔄 <b>장전</b> — 총알 +1. 빵야는 <b>이전 턴까지 모은 총알</b>로만(첫 턴 발사 불가).</div>
+      <div class="rule">💥 <b>빵야(방향)</b> — 좌/우 이웃 지정. 같은 사람 한 턴 2번 불가, 좌·우 동시는 가능.</div>
+      <div class="rule">🛡️ <b>방어(개수)</b> — 방향이 아닌 개수! 1개=한 발만 막음(어느 쪽이든), 2개=양쪽 동시 피격도 생존.</div>
+      <div class="rule">🏆 한 발이라도 맞으면 탈락, 최후 1인 승리, 같은 턴 전멸이면 무승부. 매 턴 행동 2개를 동시 선택·공개·판정.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🗺️ 작업 DAG</h2>
+    <pre class="mermaid">
+flowchart TD
+  classDef done fill:#2e6e5a,stroke:#1e4a3c,color:#fff;
+  subgraph A[A. 새 인프라]
+    A1[새 Firebase cowboy-trio-doonghwi]:::done
+    A2[RTDB asia-southeast1 · 관리API 생성·규칙배포]:::done
+    A3[새 repo + GitHub Pages]:::done
+  end
+  subgraph B[B. 게임 빌드]
+    B1[순수 로직 resolveTurn + 테스트]:::done --> B2[오프라인 vs CPU 2명]:::done
+    B1 --> B3[온라인 3인 방 · 결정적 리플레이]:::done
+    B1 --> B4[웨스턴 UI · 2행동 선택기]:::done
+  end
+  subgraph C[C. 배포 / 검증]
+    C1[웹 GitHub Pages LIVE]:::done
+    C2[안드로이드 APK v1.0.0]:::done
+    C3[에뮬 검증: 오프라인 완주 + 온라인 3인]:::done
+  end
+  subgraph D[D. 사용자 피드백 수정]
+    D1[온라인 2/3 멈춤: 좌석배정 버그]:::done
+    D2[방어 = 개수식으로 전면 변경]:::done
+    D3[재검증 · 재배포]:::done
+  end
+  A1 --> A2 --> A3
+  A2 --> B3
+  B2 --> C2
+  B3 --> C1
+  C1 --> C3 --> C2
+  C3 --> D1 --> D3
+  D2 --> D3
+    </pre>
+  </section>
+
+  <section>
+    <h2>📜 작업 로그 — 시킨 일(📣) & 한 일(✅)</h2>
+    <div class="panel">
+      <table>
+        <thead><tr><th>시각</th><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr class="ask"><td class="time">Day3</td><td><span class="badge b-ask">📣 지시</span></td><td>cowboy3p_spec 기반 <b>완전 새 앱</b> — 새 폴더·repo·GitHub Pages·<b>새 Firebase</b> / 방향 빵야·좌우 방어·2행동/턴 / 애매한 룰은 ntfy 질문 후 진행 / 에뮬 검증 + <code>--pwa-strategy=none</code> / 완성까지 멈추지 말 것</td></tr>
+          <tr><td class="time">Day3</td><td><span class="badge b-do">✅ 수행</span></td><td>새 Firebase <code>cowboy-trio-doonghwi</code> 생성 + RTDB(asia-southeast1) <b>관리 API로 헤드리스 생성</b>·보안규칙 배포. 새 repo + Pages. 순수 로직 <code>resolveTurn</code>(방향 판정·동시 사살·무승부) + 오프라인 vs CPU 2명 + 온라인 3인방. analyze 0 · test 17/17</td></tr>
+          <tr><td class="time">Day3</td><td><span class="badge b-do">✅ 수행</span></td><td>애매룰 4개 ntfy 알림 후 기본값 진행(1힛 즉사·동시 판정·상호사살/무승부·반응대결 미적용). <b>에뮬 오프라인 한 판 완주</b>(방향 빵야→1명 탈락·1명 방어 생존·승자 결정 스크린샷). 릴리스 APK <b>INTERNET 권한 누락</b>·<b>RTDB 리전 불일치</b> 버그 발견·수정. <b>온라인 실기기 검증</b>(방 생성→3인 입장→턴 해소). <b>웹 LIVE</b> + APK v1.0.0</td></tr>
+          <tr class="ask"><td class="time">Day3</td><td><span class="badge b-ask">📣 피드백</span></td><td>① 온라인 3인 모두 골라도 "다른 총잡이 기다리는 중 <b>2/3</b>"로 멈춤 → 수정 ② 방어는 방향이 아니라 <b>개수</b>(2개=양쪽 막음, 1개=한 발만) ③ 질문: firebase 등 다 만든거냐·대시보드 갱신 가능하냐</td></tr>
+          <tr><td class="time">Day3</td><td><span class="badge b-do">✅ 수행</span></td><td>① <b>온라인 2/3 멈춤 수정</b> — 좌석 배정 불일치 원인, <code>joinRoom</code>을 좌석별 트랜잭션+커밋 스냅샷 기반으로 교체. ② <b>방어 개수식 전면 변경</b>(<code>Move.defend</code> 0~2, incoming&gt;defend일 때만 탈락) — 로직·UI·CPU·테스트. analyze 0 · test 18/18. <b>에뮬 재검증</b>(앱이 p1로 정확히 입장→3인 게임 시작→턴 해소 멈춤 없음, 방어 "한 발 막음" 확인). ③ 이 대시보드 갱신. 웹 재배포·APK 갱신</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>🤖 Claude Code가 자동 생성·갱신 · 3인 카우보이 (장전 · 방어 · 빵야!)</footer>
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables:{fontFamily:'Segoe UI'}});</script>
+</body>
+</html>
