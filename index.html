@@ -76,6 +76,7 @@
           <tr><td>Firebase</td><td>RTDB <code>database:instances:create</code> 실패</td><td>기본 인스턴스 미생성, CLU 자동화 까다로움 → <span class="pill p-fix">FIX</span> 콘솔 "테스트 모드" 1클릭(30일 오픈 규칙)</td></tr>
           <tr><td>Firebase</td><td>온라인 게임: 버튼 눌러도 무반응(화면 멈춤)</td><td>RTDB는 키가 <code>0,1,2…</code>면 데이터를 <b>배열(List)</b>로 반환 → Map 캐스팅이 예외→갱신 중단 → <span class="pill p-fix">FIX</span> 턴 키를 <code>t0,t1…</code> 문자키로, List도 안전 파싱, 콜백 try/catch. 에뮬레이터로 끝까지 검증</td></tr>
           <tr><td>UX</td><td>이모지를 아이콘으로 바꾸니 밋밋함</td><td>웹 깜빡임 잡으려 한 것이나 디자인 후퇴 → <span class="pill p-fix">FIX</span> <b>Twemoji 이미지를 앱에 내장</b>(예쁨+즉시표시). 폰트도 내장</td></tr>
+          <tr><td>웹 배포</td><td>"앱엔 됐는데 웹엔 변경이 안 보임"</td><td>Flutter 웹 <b>서비스워커</b>가 옛 main.dart.js를 캐시 → 배포해도 옛 화면 → <span class="pill p-fix">FIX</span> <code>flutter build web --pwa-strategy=none</code> + index.html에서 기존 SW/캐시 unregister. (초기 1회 하드새로고침)</td></tr>
           <tr><td>Git</td><td>기여자가 joy / Claude로 잘못 표기</td><td>로컬 user.email 오설정 + Co-Authored-By → <span class="pill p-fix">FIX</span> global=doonghwi&lt;ehdgnlans@gmail.com&gt;, filter-branch 재작성, Claude 트레일러 금지</td></tr>
           <tr><td>Repo 위생</td><td><code>.omc</code> 세션 상태가 커밋됨</td><td>cwd 기반 상태파일 → <span class="pill p-fix">FIX</span> <code>.gitignore</code>에 <code>.omc/</code></td></tr>
         </tbody>
