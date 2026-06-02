@@ -181,8 +181,11 @@ const APPS = [
     ]
   }
 ];
-const STATS_URL = 'https://cowboy-duel-doonghwi-default-rtdb.asia-southeast1.firebasedatabase.app/stats.json';
+// 중앙 집계 DB: 모든 앱이 열릴 때 여기로 핑(자동 등록 + 사용량). 새 앱은 핑 한 번이면 자동 등장.
+const STATS_URL = 'https://cowboy-duel-doonghwi-default-rtdb.asia-southeast1.firebasedatabase.app/dailyapp_stats.json';
 const LAUNCH_THRESHOLD = 50; // 이 이상이면 "출시 후보"
+const CHIP = {web:'c-web', android:'c-and', online:'c-on', offline:'c-ios', ios:'c-ios'};
+const PLAT = {web:'웹', android:'안드로이드', online:'온라인', offline:'오프라인', ios:'iOS'};
 
 function fmtAgo(ts){
   if(!ts) return '아직 사용 기록 없음';
@@ -192,39 +195,59 @@ function fmtAgo(ts){
   return Math.floor(h/24)+'일 전';
 }
 
+function chips(platforms){
+  return (platforms||[]).map(p=>{
+    if(Array.isArray(p)) return `<span class="chip ${p[1]}">${p[0]}</span>`; // 폴백(쌍)
+    return `<span class="chip ${CHIP[p]||'c-web'}">${PLAT[p]||p}</span>`;     // stats(문자)
+  }).join('');
+}
+function links(m, s){
+  if(m && m.links) return m.links.map(l=>`<a href="${l[1]}">${l[0]}</a>`).join('');
+  const out=[];
+  if(s.webUrl) out.push(`<a href="${s.webUrl}">플레이</a>`);
+  if(s.repoUrl) out.push(`<a href="${s.repoUrl}">소스</a>`);
+  return out.join('');
+}
+
+// stats(중앙 DB) 주도로 자동 렌더. 하드코딩 APPS는 알려진 앱의 메타데이터 폴백.
 function render(stats){
+  stats = stats || {};
   const root = document.getElementById('apps');
   root.innerHTML = '';
-  for(const app of APPS){
-    const s = (stats && stats[app.id]) || {};
-    const opens = s.opens || 0;
-    const cand = opens >= LAUNCH_THRESHOLD;
-    const chips = app.platforms.map(p=>`<span class="chip ${p[1]}">${p[0]}</span>`).join('');
-    const links = app.links.map(l=>`<a href="${l[1]}">${l[0]}</a>`).join('');
-    // 오프라인 앱은 Firebase 사용량 집계가 없음 → 사용량/후보 UI 대신 안내 표시
-    const usageBlock = app.offline
-      ? `<div class="usage"><span class="big">—</span><span class="lab">오프라인 (집계 없음)</span></div>
-         <div class="sub2">백엔드 없이 동작 · 개인정보 수집 0</div>`
-      : `<div class="usage"><span class="big">${opens.toLocaleString()}</span><span class="lab">번 열림</span></div>
-         <div class="sub2">웹 ${s.opens_web||0} · 안드로이드 ${s.opens_android||0} · 최근 ${fmtAgo(s.lastOpen)}</div>`;
-    const candBlock = app.offline
-      ? `<div class="cand no">🔌 오프라인 앱 · 사용량 추적 안 함</div>`
-      : `<div class="cand ${cand?'yes':'no'}">${cand?'🚀 출시 후보 (사용량 충분)':'📈 관찰 중 ('+LAUNCH_THRESHOLD+'회+ 시 후보)'}</div>`;
+  const meta = {}; APPS.forEach(a=>meta[a.id]=a);
+  const ids = Array.from(new Set([...APPS.map(a=>a.id), ...Object.keys(stats)]));
+  const list = ids.map(id=>{
+    const m = meta[id]||{}; const s = stats[id]||{};
+    return {
+      id,
+      name: s.name || m.name || id,
+      desc: s.desc || m.desc || '',
+      day: s.day || m.day || '',
+      opens: s.opens||0, ow: s.opens_web||0, oa: s.opens_android||0, last: s.lastOpen,
+      platforms: (s.platforms && s.platforms.length) ? s.platforms : (m.platforms||[]),
+      _m: m, _s: s,
+    };
+  });
+  list.sort((a,b)=>b.opens-a.opens);
+  if(!list.length){ root.innerHTML='<p class="hint">아직 등록된 앱이 없어요. 앱을 한 번 열면 자동으로 등록됩니다.</p>'; return; }
+  for(const app of list){
+    const cand = app.opens >= LAUNCH_THRESHOLD;
     root.insertAdjacentHTML('beforeend', `
       <div class="app">
         <div class="day">${app.day}</div>
         <h3>${app.name}</h3>
         <div class="sub2">${app.desc}</div>
-        <div class="chips">${chips}</div>
-        ${usageBlock}
-        <div class="applinks">${links}</div>
-        ${candBlock}
+        <div class="chips">${chips(app.platforms)}</div>
+        <div class="usage"><span class="big">${app.opens.toLocaleString()}</span><span class="lab">번 열림</span></div>
+        <div class="sub2">웹 ${app.ow} · 안드로이드 ${app.oa} · 최근 ${fmtAgo(app.last)}</div>
+        <div class="applinks">${links(app._m, app._s)}</div>
+        <div class="cand ${cand?'yes':'no'}">${cand?'🚀 출시 후보 (사용량 충분)':'📈 관찰 중 ('+LAUNCH_THRESHOLD+'회+ 시 후보)'}</div>
       </div>`);
   }
 }
 
-render(null); // 먼저 0으로 그리고
-fetch(STATS_URL).then(r=>r.json()).then(render).catch(()=>{});
+render(null);
+fetch(STATS_URL).then(r=>r.json()).then(render).catch(()=>render(null));
 </script>
 </body>
 </html>
