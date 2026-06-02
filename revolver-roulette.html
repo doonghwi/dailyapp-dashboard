@@ -127,6 +127,8 @@ flowchart TD
           <tr class="ask"><td class="time">Day 2</td><td><span class="badge b-ask">📣 피드백</span></td><td>기능·회전음 만족 👍 / <b>총소리 더 강하고 무섭게(팡 터지듯 놀라도록)</b> / <b>세로(portrait)로 90도 돌려라</b> — 51·62·73·84 배치(총신 수직, 총구 아래)·화면비율도 세로</td></tr>
           <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td><b>총소리 강화</b> — mixkit 녹음에 0ms 풀스케일 임팩트(놀람)+서브베이스 boom+저음바디+soft-clip 펀치+다크 리버브 tail 레이어(numpy/scipy). RMS로 강도 확인(명중 탭 0.39 vs 일반 0.2)</td></tr>
           <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td><b>세로 모드 전환</b> — orientation portrait, CustomPaint를 90° 시계회전(총신 수직·총구 우하단·손잡이 좌상단), 화면 fit를 세로 비율로 재계산. 에뮬 세로 스크린샷으로 배치·명중 검증. 웹/APK(v1.2.0) 재배포</td></tr>
+          <tr class="ask"><td class="time">Day 2</td><td><span class="badge b-ask">📣 피드백</span></td><td>회전음 조금 줄이고 폭발음 조금 키워줘</td></tr>
+          <tr><td class="time">·</td><td><span class="badge b-do">✅ 수행</span></td><td>회전음 볼륨 1.0→0.55, 폭발음은 리버브 줄이고 본체 강조로 라우드니스 ↑(RMS 0.13→0.19). 대비 약 5배. 웹/APK 재배포</td></tr>
         </tbody>
       </table>
     </div>
