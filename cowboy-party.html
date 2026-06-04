@@ -92,6 +92,9 @@
           <tr><td><span class="badge b-fix">수정</span></td><td>게임 방법 이모티콘 규칙 제거</td><td>불필요한 "이모티콘" 설명 카드를 게임 방법에서 삭제.</td><td><span class="st st-live">LIVE</span></td></tr>
           <tr><td><span class="badge b-fix">수정</span></td><td>반응결투 승자 해골 표시</td><td>마지막 동시 탈락 후 결투에서 이겨도 승자까지 해골/탈락로 뜨던 버그 → 결투 승자는 <b>살아있는 상태(서있는 승자)</b>로 표시. 단위테스트 추가.</td><td><span class="st st-live">LIVE</span></td></tr>
           <tr><td><span class="badge b-fix">수정</span></td><td>전원 방어/장전 멘트 정확화</td><td>아무도 안 쐈을 때 항상 "장전과 방어…"로 뜨던 것 → 실제 행동대로 <b>"둘 다 방어!" · "둘 다 장전!"</b>(3인↑은 "모두"), 섞였을 때만 "장전과 방어…". 단위테스트 3건 추가.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-fix">수정</span></td><td>조용한 턴 이펙트 표시</td><td>온라인에서 아무도 안 쏜 턴(장전·방어만)은 리빌을 건너뛰어 장전(+1)·방어(방패) 이펙트가 안 보이던 것 → <b>모든 턴에 리빌</b>(조용한 턴은 짧게)해 이펙트가 항상 보이게.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-fix">수정</span></td><td>이모티콘 화면 밖 표시</td><td>2인에서 상대(상단 좌석) 이모티콘이 화면 위로 잘려 나가던 버그 → 카드 위가 잘릴 좌석은 <b>버블을 카드 아래로 플립</b>해 항상 화면 안. 위젯테스트 추가.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-fix">수정</span></td><td>시작된 방 재입장</td><td>한 번 시작된 방은 "이미 시작된 방"으로 재입장이 막히던 것 → 게임이 끝나거나 누가 나가 <b>빈 좌석이 있으면 재입장 가능</b>(quit 마커 정리). 라이브 검증.</td><td><span class="st st-live">LIVE</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -117,6 +120,8 @@
           <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>게임 방법 이모티콘 카드 삭제. 배너 폭 제한을 4인 레이아웃에만 적용(<code>w*0.52</code>), 2·3·5·6인은 <code>w*0.86</code>으로 넓혀 한 줄 복구. 에뮬에서 2인 시작 배너 한 줄·게임방법 변경 시각확인. analyze 0·테스트 통과·웹/APK 재배포.</td></tr>
           <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 피드백</span></td><td>① 먼저 눌러 이기는 결투에서 한 명이 이겨도 둘 다 죽은 걸로 뜸 — 이긴 사람은 살아야 함 ② 둘 다 방어/둘 다 장전인데 "장전 또는 방어?"로 떠서 멘트 수정</td></tr>
           <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>결투 승자를 <code>alive=true</code>로 되살려 표시(해골 제거). 아무도 안 쐈을 때 행동대로 "둘 다 방어/장전!"(3인↑ "모두") 멘트, 섞이면 "장전과 방어…". 단위테스트 4건 추가·analyze 0·테스트 23개 통과·웹/APK 재배포.</td></tr>
+          <tr class="ask"><td class="time">Day5</td><td><span class="badge b-ask">📣 피드백</span></td><td>① 장전·방어만 한 턴(공격 없어도) 이펙트 보이게 ② 2인일 때 이모티콘이 화면 밖에 표시됨 ③ 시작했던 방도 게임 끝나면 재입장 가능하게</td></tr>
+          <tr><td class="time">Day5</td><td><span class="badge b-do">✅ 수행</span></td><td>온라인 조용한 턴도 항상 리빌해 장전(+1)·방어 이펙트 표시. 상단 좌석 이모티콘 버블을 카드 아래로 플립(화면 밖 방지)·위젯테스트. 시작된 방도 빈/오래된 좌석이면 재입장(quit 마커 정리)·라이브 검증. analyze 0·테스트 통과·웹/APK 재배포.</td></tr>
         </tbody>
       </table>
     </div>
