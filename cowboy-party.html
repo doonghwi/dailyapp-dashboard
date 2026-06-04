@@ -85,6 +85,9 @@
           <tr><td><span class="badge b-fix">수정</span></td><td>상대 1명이면 빵야 자동조준</td><td>살아있는 상대가 1명뿐이면 타겟을 자동 선택(오프라인·온라인 모두). 카우보이 듀얼처럼 바로 결정 가능.</td><td><span class="st st-live">LIVE</span></td></tr>
           <tr><td><span class="badge b-fix">수정</span></td><td>빵야 후 결정 멈춤 완화</td><td>"타겟 미선택 시 결정 비활성" 구간을 자동조준으로 줄여 결정이 안 눌리던 현상 완화.</td><td><span class="st st-live">LIVE</span></td></tr>
           <tr><td><span class="badge b-fix">수정</span></td><td>4인 중앙 문구 가림</td><td>원형 테이블 중앙 배너를 z-order 최상단으로 올리고 폭을 제한(<code>w*0.52</code>)해 4인 좌석에 가리지 않게.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-fix">수정</span></td><td>상대 퇴장 시 가짜 승리 문구</td><td>상대가 나가면 닉네임이 사라져 "카우보이 승리!"로 깨지던 문제 → 퇴장 닉네임을 <code>quit</code> 마커에 보존해 <b>"OOO 님이 나갔어요"</b>로 정직하게 표시.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-new">신규</span></td><td>⚡ "슈 퍼 빵 야" 발동 이펙트</td><td>슈퍼빵야가 나가는 순간 화면에 굵고 큰 <b>노란색 "슈 퍼 빵 야"</b>가 번쩍(스킬 발동 느낌·외곽선/글로우·팝&셰이크). 게임 끝내는 한 방에도 결과 전에 먼저 표시. 오프라인·온라인 공용.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-feat">기능</span></td><td>게임 방법 · 슈퍼빵야 보강</td><td>"방어 무시 확정킬" 규칙을 더 명확히(6발→5발 소비·발동 이펙트 안내 포함).</td><td><span class="st st-live">LIVE</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -104,6 +107,8 @@
           <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>onDisconnect 오판 제거 → 하트비트+유예. 장전/방어 이펙트·이모티콘 리액션·즉시 점수·슈퍼빵야 구현. 빌드로그를 기능 표로 개편(DAG 제거). 기록 규칙 메모리 저장. 웹·APK 배포 완료</td></tr>
           <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 피드백</span></td><td>① 반응결투에서 점수가 진 사람에게 가는 오기록 ② 상대 1명이면 빵야 자동조준 ③ 빵야 후 결정이 안 눌릴 때가 있음 ④ 4인일 때 중앙 문구가 좌석에 가림</td></tr>
           <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>반응결투 승자 판정을 호스트 서버시각 중재로 교체(점수 정확). 상대 1명 시 자동조준(양 화면). 자동조준으로 결정 멈춤 완화. 4인 중앙 배너 z-order 최상단+폭 제한. analyze 0·테스트 통과·웹/APK 재배포 완료.</td></tr>
+          <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 피드백</span></td><td>① 상대가 나가면 "상대 승리!"가 "카우보이 승리!"로 바뀜 → "상대닉이 나갔습니다"로 ② 슈퍼빵야 발동 시 결과 전에 화려한 노란 "슈 퍼 빵 야" 이펙트 ③ 게임 방법에 슈퍼빵야 설명 보강</td></tr>
+          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>퇴장 닉네임을 quit 마커에 보존 → "OOO 님이 나갔어요" 표시(가짜 승리 제거)·단위테스트 2건 추가. 슈퍼빵야 발동 노란 "슈 퍼 빵 야" 오버레이 위젯(스킬 느낌, 오프/온 공용, 게임종료 시 결과 전 표시)·위젯 테스트. 게임 방법 슈퍼빵야 보강. analyze 0·테스트 20개 통과·웹/APK 재배포.</td></tr>
         </tbody>
       </table>
     </div>
