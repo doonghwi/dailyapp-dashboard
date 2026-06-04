@@ -90,6 +90,8 @@
           <tr><td><span class="badge b-feat">기능</span></td><td>게임 방법 · 슈퍼빵야 보강</td><td>"방어 무시 확정킬" 규칙을 더 명확히(6발→5발 소비·발동 이펙트 안내 포함).</td><td><span class="st st-live">LIVE</span></td></tr>
           <tr><td><span class="badge b-fix">수정</span></td><td>중앙 배너 2줄 줄바꿈</td><td>4인 가림 수정 때 넣은 폭 제한(<code>w*0.52</code>)이 2·3인에서도 적용돼 문구가 2줄로 깨지던 문제 → <b>4인 레이아웃만</b> 좁히고(좌우 좌석이 정확히 중앙높이) 나머지는 <code>w*0.86</code>으로 넓혀 한 줄 복구.</td><td><span class="st st-live">LIVE</span></td></tr>
           <tr><td><span class="badge b-fix">수정</span></td><td>게임 방법 이모티콘 규칙 제거</td><td>불필요한 "이모티콘" 설명 카드를 게임 방법에서 삭제.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-fix">수정</span></td><td>반응결투 승자 해골 표시</td><td>마지막 동시 탈락 후 결투에서 이겨도 승자까지 해골/탈락로 뜨던 버그 → 결투 승자는 <b>살아있는 상태(서있는 승자)</b>로 표시. 단위테스트 추가.</td><td><span class="st st-live">LIVE</span></td></tr>
+          <tr><td><span class="badge b-fix">수정</span></td><td>전원 방어/장전 멘트 정확화</td><td>아무도 안 쐈을 때 항상 "장전과 방어…"로 뜨던 것 → 실제 행동대로 <b>"둘 다 방어!" · "둘 다 장전!"</b>(3인↑은 "모두"), 섞였을 때만 "장전과 방어…". 단위테스트 3건 추가.</td><td><span class="st st-live">LIVE</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -113,6 +115,8 @@
           <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>퇴장 닉네임을 quit 마커에 보존 → "OOO 님이 나갔어요" 표시(가짜 승리 제거)·단위테스트 2건 추가. 슈퍼빵야 발동 노란 "슈 퍼 빵 야" 오버레이 위젯(스킬 느낌, 오프/온 공용, 게임종료 시 결과 전 표시)·위젯 테스트. 게임 방법 슈퍼빵야 보강. analyze 0·테스트 20개 통과·웹/APK 재배포.</td></tr>
           <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 피드백</span></td><td>① 게임 방법에 이모티콘 설명은 불필요 ② 중앙 멘트가 2줄로 깨짐(원래 한 줄이었음)</td></tr>
           <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>게임 방법 이모티콘 카드 삭제. 배너 폭 제한을 4인 레이아웃에만 적용(<code>w*0.52</code>), 2·3·5·6인은 <code>w*0.86</code>으로 넓혀 한 줄 복구. 에뮬에서 2인 시작 배너 한 줄·게임방법 변경 시각확인. analyze 0·테스트 통과·웹/APK 재배포.</td></tr>
+          <tr class="ask"><td class="time">Day4</td><td><span class="badge b-ask">📣 피드백</span></td><td>① 먼저 눌러 이기는 결투에서 한 명이 이겨도 둘 다 죽은 걸로 뜸 — 이긴 사람은 살아야 함 ② 둘 다 방어/둘 다 장전인데 "장전 또는 방어?"로 떠서 멘트 수정</td></tr>
+          <tr><td class="time">Day4</td><td><span class="badge b-do">✅ 수행</span></td><td>결투 승자를 <code>alive=true</code>로 되살려 표시(해골 제거). 아무도 안 쐈을 때 행동대로 "둘 다 방어/장전!"(3인↑ "모두") 멘트, 섞이면 "장전과 방어…". 단위테스트 4건 추가·analyze 0·테스트 23개 통과·웹/APK 재배포.</td></tr>
         </tbody>
       </table>
     </div>
