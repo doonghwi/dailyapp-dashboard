@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🤠 DailyApp 진행 대시보드 — 카우보이 듀얼</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  :root{
+    --sand:#e8d5a8; --parch:#f5ead0; --leather:#3b2412; --rust:#c8541e;
+    --danger:#9e2b25; --sage:#2e6e5a; --gold:#d9a441; --ink:#241a12; --muted:#7a6748;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;
+    background:radial-gradient(circle at 50% -10%, #f7eccf 0%, #e8d5a8 60%, #ddc792 100%);
+    color:var(--ink);line-height:1.5;min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 80px}
+  header{text-align:center;border-bottom:4px double var(--leather);padding-bottom:18px}
+  h1{font-size:2.1rem;margin:.2em 0;letter-spacing:1px}
+  h1 .sub{display:block;font-size:.95rem;font-weight:400;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:6px}
+  .updated{font-size:.85rem;color:var(--muted)}
+  .updated a{color:var(--rust)}
+  .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.74rem;font-weight:800;color:#fff;white-space:nowrap}
+  .b-ask{background:var(--rust)} .b-do{background:var(--sage)} .b-prog{background:var(--gold);color:#3b2412}
+  section{margin-top:34px}
+  h2{font-size:1.3rem;border-left:6px solid var(--rust);padding-left:12px;margin-bottom:14px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .card{background:var(--parch);border:1px solid #d8c08a;border-radius:12px;padding:14px;box-shadow:0 2px 0 #d8c08a}
+  .card .n{font-size:1.6rem;font-weight:800;color:var(--leather)}
+  .card .l{font-size:.82rem;color:var(--muted)}
+  .panel{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:18px;overflow:auto}
+  table{width:100%;border-collapse:collapse;font-size:.92rem}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e0cfa0;vertical-align:top}
+  th{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:1px}
+  td.time{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
+  tr.ask{background:#fbf0db}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .d-done{background:var(--sage)} .d-prog{background:var(--gold)} .d-todo{background:#a9956f} .d-block{background:var(--danger)}
+  .legend{font-size:.85rem;color:var(--muted);margin-top:10px}
+  .legend span{margin-right:16px}
+  footer{margin-top:40px;text-align:center;color:var(--muted);font-size:.8rem}
+  .mermaid{background:var(--parch);border:1px solid #d8c08a;border-radius:14px;padding:18px}
+  code{background:#efe2c2;padding:1px 5px;border-radius:5px;font-size:.86em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🤠 카우보이 듀얼 <span class="sub">DailyApp · Day 1 · Flutter (Android · Web)</span></h1>
+    <div class="updated">
+      마지막 업데이트: <strong>2026-06-02 04:51</strong> ·
+      저장소: <a href="https://github.com/doonghwi/cowboy-duel">github.com/doonghwi/cowboy-duel</a> ·
+      웹: <a href="https://doonghwi.github.io/cowboy-duel/">doonghwi.github.io/cowboy-duel</a> ·
+      Firebase: <code>cowboy-duel-doonghwi</code>
+    </div>
+  </header>
+
+  <section>
+    <h2>📊 한눈에 보기</h2>
+    <div class="cards">
+      <div class="card"><div class="n">12/12</div><div class="l">테스트 통과 (analyze 0 issue)</div></div>
+      <div class="card"><div class="n">완료</div><div class="l">오프라인 게임 코드</div></div>
+      <div class="card"><div class="n">완료</div><div class="l">GitHub repo + 푸시</div></div>
+      <div class="card"><div class="n">완료</div><div class="l">APK + 웹 배포(빌딩)</div></div>
+      <div class="card"><div class="n">준비</div><div class="l">온라인(Firebase 새 프로젝트)</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🗺️ 작업 DAG (의존 관계)</h2>
+    <pre class="mermaid">
+flowchart TD
+  classDef done fill:#2e6e5a,stroke:#1e4a3c,color:#fff;
+  classDef prog fill:#d9a441,stroke:#a87a1e,color:#3b2412;
+  classDef todo fill:#efe2c2,stroke:#a9956f,color:#5a4a2c;
+  classDef block fill:#9e2b25,stroke:#6e1a17,color:#fff;
+
+  subgraph A[A. 환경 세팅]
+    A1[ntfy 알림]:::done
+    A2[gh 인증 doonghwi]:::done
+    A3[JDK / Flutter 3.44]:::done
+    A4[Android SDK + 라이선스]:::done
+    A5[메모리 / 세션기억]:::done
+    A6[플러그인: frontend-design]:::done
+    A7[Firebase CLI + 로그인]:::done
+  end
+
+  subgraph B[B. 게임 빌드]
+    B1[스캐폴드]:::done --> B2[로직 + 테스트 12/12]:::done
+    B2 --> B3[CPU AI]:::done
+    B2 --> B4[디자인: 폰트·사막배경·애니]:::done
+    B4 --> B5[vs CPU + 카우보이 연출]:::done
+    B4 --> B6[게임 방법]:::done
+  end
+
+  subgraph C[C. 배포 / 버전관리]
+    C1[git + GitHub repo]:::done
+    C2[웹 → GitHub Pages LIVE]:::done
+    C3[안드로이드 APK 43.9MB]:::done
+  end
+
+  subgraph D[D. 온라인 멀티]
+    D1[Firebase 새 프로젝트]:::done
+    D2[Realtime DB + 방코드 대전]:::todo
+  end
+
+  A3 --> B1
+  A4 --> C3
+  B5 --> C2
+  B6 --> C2
+  C1 --> C2
+  B5 --> C3
+  C1 --> C3
+  A7 --> D1 --> D2
+    </pre>
+    <div class="legend">
+      <span><span class="dot d-done"></span>완료</span>
+      <span><span class="dot d-prog"></span>진행 중</span>
+      <span><span class="dot d-todo"></span>예정</span>
+      <span><span class="dot d-block"></span>대기</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>📜 작업 로그 — 시킨 일(📣) & 한 일(✅)</h2>
+    <div class="panel">
+      <table>
+        <thead><tr><th>시각</th><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr class="ask"><td class="time">04:10</td><td><span class="badge b-ask">📣 지시</span></td><td>프로젝트 시작: 앱 제작용 플러그인 탐색·사용 / dailyapp 폴더 / 첫 앱=카우보이 게임 / doonghwi GitHub 커밋·푸시 / ntfy 알림·5h경고 / 멈추지 말기 / 디자인 포함 / Android→iOS→Web / 세션간 기억 / 세팅 질문 먼저</td></tr>
+          <tr><td class="time">04:15</td><td><span class="badge b-do">✅ 수행</span></td><td>환경 점검(gh=doonghwi 확인, git/node/adb OK), 플러그인 인터넷 조사, dailyapp 폴더 생성, 세팅 4문항 질문</td></tr>
+          <tr><td class="time">04:21</td><td><span class="badge b-do">✅ 수행</span></td><td>ntfy 토픽 <code>app-making-doonghwi</code> 연결, JDK17·Flutter 설치, 메모리 저장</td></tr>
+          <tr class="ask"><td class="time">04:24</td><td><span class="badge b-ask">📣 정정</span></td><td>"플러그인은 컨텍스트 기억용이 아니라 <b>앱 개발을 체계적으로</b> 돕는 것" → 이후 "<b>앱·웹 전용 최신·최인기</b>"로 재정정</td></tr>
+          <tr><td class="time">04:27</td><td><span class="badge b-do">✅ 수행</span></td><td>플러그인 재조사 → 공식 <code>frontend-design</code>+<code>feature-dev</code> 채택. 앱 스캐폴드 + 게임 로직/CPU AI + 테스트 11/11</td></tr>
+          <tr class="ask"><td class="time">04:30</td><td><span class="badge b-ask">📣 지시</span></td><td>멀티플레이 추가 / 어려우면 ntfy로 질문하고 다른 작업 / 질문은 ntfy로, 대기하지 말 것</td></tr>
+          <tr><td class="time">04:31</td><td><span class="badge b-do">✅ 수행</span></td><td>멀티플레이 방식 ntfy로 질문 발송, Android SDK 설치+라이선스 진행하며 계속 작업</td></tr>
+          <tr class="ask"><td class="time">04:33</td><td><span class="badge b-ask">📣 지시</span></td><td>작업 DAG + 이벤트 추적 기록을 보기 쉬운 HTML로, 틈틈이 업데이트</td></tr>
+          <tr><td class="time">04:34</td><td><span class="badge b-do">✅ 수행</span></td><td>이 대시보드(progress.html) 생성 — DAG + 타임라인</td></tr>
+          <tr class="ask"><td class="time">04:36</td><td><span class="badge b-ask">📣 지시</span></td><td>멀티 답변: 오프라인 먼저 / vs CPU 좋음 / <b>같은 기기 2인 제거</b> / WebRTC·Firebase 질문</td></tr>
+          <tr><td class="time">04:38</td><td><span class="badge b-do">✅ 수행</span></td><td>WebRTC·Firebase 비용/구조 설명. UI 작성(홈·vs CPU·게임방법), 2인전 제거</td></tr>
+          <tr class="ask"><td class="time">04:40</td><td><span class="badge b-ask">📣 지시</span></td><td>Firebase 연결하되 <b>새 프로젝트</b>로 / 연결법·권한 질문 / 디자인 예쁘게 + 게임디자인 플러그인 찾기</td></tr>
+          <tr><td class="time">04:42</td><td><span class="badge b-do">✅ 수행</span></td><td>게임디자인 플러그인 조사(엔진 전용→Flutter는 frontend-design). 디자인 업그레이드: 웨스턴 폰트·사막 배경·애니메이션. Firebase CLI 설치 + 연결법 안내</td></tr>
+          <tr><td class="time">04:46</td><td><span class="badge b-do">✅ 수행</span></td><td>재검증 통과(analyze 0 issue, 테스트 12/12). git init + <b>GitHub repo 생성·푸시</b>. 웹 릴리스 빌드 성공</td></tr>
+          <tr class="ask"><td class="time">04:47</td><td><span class="badge b-ask">📣 지시</span></td><td>Firebase 로그인 완료 / progress에 "시킨 일+한 일" 둘 다 항상 기록 / 이 규칙 메모리에 저장</td></tr>
+          <tr><td class="time">04:48</td><td><span class="badge b-do">✅ 수행</span></td><td>Firebase 로그인 확인. <b>새 프로젝트 <code>cowboy-duel-doonghwi</code> 생성</b>. 로깅 규칙 메모리 저장. 이 로그를 지시+수행 통합본으로 갱신</td></tr>
+          <tr><td class="time">04:50</td><td><span class="badge b-do">✅ 수행</span></td><td><b>안드로이드 APK 빌드 성공</b> (43.9MB) → <code>C:\dev\dailyapp\cowboy-duel-v1.apk</code>. ntfy 마일스톤 알림 발송</td></tr>
+          <tr><td class="time">04:51</td><td><span class="badge b-do">✅ 수행</span></td><td><b>웹 GitHub Pages 배포 LIVE</b> → <a href="https://doonghwi.github.io/cowboy-duel/">doonghwi.github.io/cowboy-duel</a> (HTTP 200 확인). <strong>오프라인 버전 출시 완료 🎉</strong></td></tr>
+          <tr class="ask"><td class="time">2일차</td><td><span class="badge b-ask">📣 지시</span></td><td><b>[리볼버 룰렛]</b> roulette_spec.md 기반 새 오프라인 앱 / 새 폴더·repo·Pages / 가로 기본·측면 리볼버(우하향)·탭표시·가로 카운터·<b>사운드</b>·명중시 빨간화면 / 에뮬 검증 + <code>--pwa-strategy=none</code> 배포 / 완성까지 멈추지 말 것</td></tr>
+          <tr><td class="time">2일차</td><td><span class="badge b-do">✅ 수행</span></td><td><b>리볼버 룰렛 완성·배포 🎉</b> — CustomPaint 자작 리볼버 + Python 합성 사운드(저작권0). analyze 0·test 2/2. <a href="https://github.com/doonghwi/revolver-roulette">repo</a> · <b>웹 LIVE</b> <a href="https://doonghwi.github.io/revolver-roulette/">doonghwi.github.io/revolver-roulette</a>(200) · APK 릴리스 v1.0.0. 에뮬 검증(생존 회전·명중 빨간화면 스크린샷). 보고서: revolver_roulette/REPORT.html</td></tr>
+          <tr class="ask"><td class="time">3일차</td><td><span class="badge b-ask">📣 지시</span></td><td><b>[3인 카우보이]</b> cowboy3p_spec.md 기반 새 앱 — 새 폴더·repo·Pages·<b>Firebase 프로젝트</b> / 방향 빵야·좌우 방어·2행동/턴 / 애매한 룰은 ntfy 질문 후 진행 / 에뮬 검증 + <code>--pwa-strategy=none</code> 배포 / 완성까지 멈추지 말 것</td></tr>
+          <tr><td class="time">3일차</td><td><span class="badge b-do">✅ 수행</span></td><td><b>3인 카우보이 빌드·검증</b> — 새 Firebase <code>cowboy-trio-doonghwi</code>(RTDB asia-southeast1, 관리API로 생성·보안규칙 배포) + repo <a href="https://github.com/doonghwi/cowboy-trio">cowboy-trio</a>. 순수 로직 <code>resolveTurn</code>(방향 판정·동시 사살·무승부) + 오프라인 vs CPU 2명 + 온라인 3인방. analyze 0 · test 17/17. <b>에뮬 검증</b>: 오프라인 한 판 완주(방향 빵야·방어·탈락·승리 스크린샷). 릴리스 APK INTERNET 권한 누락 버그 발견·수정. <b>웹 LIVE</b> <a href="https://doonghwi.github.io/cowboy-trio/">doonghwi.github.io/cowboy-trio</a> · APK v1.0.0.</td></tr>
+          <tr class="ask"><td class="time">3일차</td><td><span class="badge b-ask">📣 지시</span></td><td>① 온라인 3인 모두 선택해도 "다른 총잡이 기다리는 중 2/3"로 멈춤 → 버그수정 ② 방어는 방향이 아니라 <b>개수</b> (2개=양쪽 막음, 1개=한 발만 막음) ③ 질문: firebase 등 다 만든거냐·대시보드 갱신 가능하냐</td></tr>
+          <tr><td class="time">3일차</td><td><span class="badge b-do">✅ 수행</span></td><td><b>버그·기능 수정 완료</b> — ① 온라인 2/3 멈춤=좌석 배정 불일치 → joinRoom을 좌석별 트랜잭션+커밋 스냅샷 기반으로 교체(게스트 p1/p2). ② 방어 개수식으로 전면 변경(<code>Move.defend</code> 0~2, incoming&gt;defend일 때만 탈락) — 로직·UI·CPU·테스트. analyze 0 · test 18/18. <b>에뮬 실기기 재검증</b>: 앱이 p1로 정확히 입장→3인 게임 시작→턴 해소(멈춤 없음), 방어 "한 발 막음" UI 확인. 웹 재배포·APK 갱신·커밋 push.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>🎯 다음 단계</h2>
+    <div class="panel">
+      <ol style="margin:0;padding-left:20px">
+        <li>✅ <s>웹 GitHub Pages 배포</s> · ✅ <s>안드로이드 APK</s> — 완료</li>
+        <li><b>진행 중</b>: <code>flutterfire configure</code> (cowboy-duel-doonghwi) → Realtime DB + <b>방코드 온라인 대전</b> 구현</li>
+        <li>(추후) Mac 환경에서 iOS 버전</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>🤖 Claude Code가 자동 생성·갱신하는 대시보드 · 카우보이 듀얼 (장전 · 방어 · 빵야!)</footer>
+</div>
+<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables:{fontFamily:'Segoe UI'}});</script>
+</body>
+</html>
