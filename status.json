@@ -1,28 +1,41 @@
 {
-  "updated": "2026-06-11 02:30",
+  "updated": "2026-06-11 03:30",
   "focus": {
     "app": "🎉 카우보이 파티",
-    "summary": "대규모 업데이트 진행 중 — 버그수정 + 캐릭터 8종 + 랭킹/로그인/데일리보상 + 방 목록 + 디자인·사운드",
+    "summary": "대규모 업데이트 배포 — 캐릭터 8종(코인 해금)·시즌 랭킹·출석 보상·방 목록·재입장 버그 수정·사운드 12종. 웹 배포 완료, iOS 시뮬레이터 검증 진행 중",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
   "actionNeeded": [
     {
       "date": "2026-06-11",
+      "title": "Firebase 콘솔에서 Authentication 켜기 (2분)",
+      "detail": "console.firebase.google.com → Cowboy Party 프로젝트 → Authentication → 시작하기 → Sign-in method에서 [Google]과 [익명] 활성화. 이걸 켜야 Google 로그인·랭킹 등록이 작동해요 (켜기 전엔 게스트 모드로 안전 폴백). 안드로이드 SHA1은 이미 등록해둠.",
+      "level": "중간 — 랭킹 기능 쓰려면 필수"
+    },
+    {
+      "date": "2026-06-11",
+      "title": "카우보이 파티 유입 요소 후보 고르기",
+      "detail": "cowboy_party/GROWTH_CANDIDATES.md에 10개 후보(스킨, 일일미션, 업적, 친구초대, 결과공유, 시즌패스 등)와 추천 조합을 정리함. 번호를 골라주면 다음 작업으로 구현.",
+      "level": "중간 — 다음 작업 결정"
+    },
+    {
+      "date": "2026-06-11",
       "title": "디스코드 서버 생성",
-      "detail": "앱에 '공식 디스코드' 버튼 자리는 만들어 둠. Discord에서 서버 만들고 영구 초대링크를 알려주면 1줄 수정으로 연결됨.",
+      "detail": "앱에 '공식 디스코드' 버튼 자리는 만들어 둠(설정 시트). 서버 만들고 영구 초대링크를 주면 1줄 수정으로 연결.",
       "level": "낮음(나중에)"
     }
   ],
   "inProgress": [
-    { "task": "중앙 RTDB 테스트모드 → 정식 보안규칙 교체 (7월 만료 해결)", "state": "done" },
-    { "task": "revolver_roulette·five_dice 사용량 핑 부착 + 웹/APK 재배포", "state": "done" },
-    { "task": "Mac 개발환경 구축 (Flutter/Android에뮬/iOS시뮬/Xcode)", "state": "done" },
-    { "task": "카우보이 파티: 재입장 버그 수정 (게임중 난입 즉시부활)", "state": "doing" },
-    { "task": "카우보이 파티: 캐릭터 8종 + 장착 탭", "state": "doing" },
-    { "task": "카우보이 파티: 로그인·시즌랭킹·코인·데일리보상", "state": "doing" },
-    { "task": "카우보이 파티: 방 목록 로비, 광고배너 자리, 디자인·사운드", "state": "doing" },
-    { "task": "카우보이 파티: 유입 요소 후보군 문서 (사용자 선택 대기)", "state": "todo" },
-    { "task": "카우보이 파티: iOS 추가 + 에뮬/시뮬 검증 + 배포", "state": "todo" }
+    { "task": "중앙 RTDB 테스트모드 → 정식 보안규칙 (7월 만료 해결)", "state": "done" },
+    { "task": "cowboy-party DB 보안규칙 강화 + 배포", "state": "done" },
+    { "task": "재입장 버그 수정 (게임중 난입 즉시부활) + 회귀 테스트", "state": "done" },
+    { "task": "캐릭터 8종 + 장착 탭 + 코인 해금", "state": "done" },
+    { "task": "시즌 랭킹·출석 보상·Google 로그인(폴백 포함)", "state": "done" },
+    { "task": "방 목록 로비 + 사운드 12종 + 광고자리 + 디스코드 버튼자리", "state": "done" },
+    { "task": "Android 에뮬레이터 검증 (홈·캐릭터·보상·방생성 스크린샷 통과)", "state": "done" },
+    { "task": "웹 배포 (gh-pages)", "state": "done" },
+    { "task": "iOS 시뮬레이터 빌드·검증 (Xcode 설치 완료, 진행 중)", "state": "doing" },
+    { "task": "유입 요소 구현 (사용자 후보 선택 대기)", "state": "todo" }
   ],
-  "appFocus": "카우보이 파티에 집중. 나머지 앱은 배포 완료 상태로 관찰만 (대시보드 사용량 참고)."
+  "appFocus": "카우보이 파티에 집중. revolver_roulette·five_dice는 사용량 핑 부착 재배포 완료 — 대시보드 opens 관찰."
 }
