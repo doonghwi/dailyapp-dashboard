@@ -1,8 +1,8 @@
 {
-  "updated": "2026-06-11 03:30",
+  "updated": "2026-06-11 06:55",
   "focus": {
     "app": "🎉 카우보이 파티",
-    "summary": "대규모 업데이트 배포 — 캐릭터 8종(코인 해금)·시즌 랭킹·출석 보상·방 목록·재입장 버그 수정·사운드 12종. 웹 배포 완료, iOS 시뮬레이터 검증 진행 중",
+    "summary": "SELF-QA 자가진단 도입 → 8건 발견, P0/P1 전부 수정·재배포 완료 (오프라인 캐릭터 적용, 게임방법 갱신, 와이드 제한 등). 보안경보(Firebase 키)도 당일 조치 완료",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
   "actionNeeded": [
@@ -26,16 +26,30 @@
     }
   ],
   "inProgress": [
-    { "task": "중앙 RTDB 테스트모드 → 정식 보안규칙 (7월 만료 해결)", "state": "done" },
-    { "task": "cowboy-party DB 보안규칙 강화 + 배포", "state": "done" },
-    { "task": "재입장 버그 수정 (게임중 난입 즉시부활) + 회귀 테스트", "state": "done" },
-    { "task": "캐릭터 8종 + 장착 탭 + 코인 해금", "state": "done" },
-    { "task": "시즌 랭킹·출석 보상·Google 로그인(폴백 포함)", "state": "done" },
-    { "task": "방 목록 로비 + 사운드 12종 + 광고자리 + 디스코드 버튼자리", "state": "done" },
-    { "task": "Android 에뮬레이터 검증 (홈·캐릭터·보상·방생성 스크린샷 통과)", "state": "done" },
-    { "task": "웹 배포 (gh-pages)", "state": "done" },
-    { "task": "iOS 시뮬레이터 빌드·검증 (Xcode 설치 완료, 진행 중)", "state": "doing" },
-    { "task": "유입 요소 구현 (사용자 후보 선택 대기)", "state": "todo" }
+    {
+      "task": "SELF-QA 자가진단 프로세스 도입 (_make-new-app/SELF_QA.md, 출시 게이트 편입)",
+      "state": "done"
+    },
+    {
+      "task": "QA 발견 8건 중 P0/P1 6건 수정·기기 재검증·재배포 (cowboy_party/QA_REPORT.md)",
+      "state": "done"
+    },
+    {
+      "task": "보안: GitHub 시크릿 경보 3건 조치 (키 앱제한 + 파일 untrack + push 자동스캔 훅)",
+      "state": "done"
+    },
+    {
+      "task": "카우보이 파티 대규모 업데이트 (캐릭터·랭킹·보상·방목록·사운드·iOS)",
+      "state": "done"
+    },
+    {
+      "task": "P2 백로그: 캐릭터 초상 일러스트 통일, 로비 경량 인덱스, 용어 통일",
+      "state": "todo"
+    },
+    {
+      "task": "유입 요소 구현 (GROWTH_CANDIDATES.md에서 사용자 선택 대기)",
+      "state": "todo"
+    }
   ],
   "appFocus": "카우보이 파티에 집중. revolver_roulette·five_dice는 사용량 핑 부착 재배포 완료 — 대시보드 opens 관찰."
 }
