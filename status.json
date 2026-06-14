@@ -7,10 +7,10 @@
   },
   "actionNeeded": [
     {
-      "date": "2026-06-11",
-      "title": "Firebase 콘솔에서 Authentication 켜기 (2분)",
-      "detail": "console.firebase.google.com → Cowboy Party 프로젝트 → Authentication → 시작하기 → Sign-in method에서 [Google]과 [익명] 활성화. 이걸 켜야 Google 로그인·랭킹 등록이 작동해요 (켜기 전엔 게스트 모드로 안전 폴백). 안드로이드 SHA1은 이미 등록해둠.",
-      "level": "중간 — 랭킹 기능 쓰려면 필수"
+      "date": "2026-06-15",
+      "title": "(웹만) 승인된 도메인 확인",
+      "detail": "Firebase Auth 켜짐+익명 검증 완료. 웹에서 구글 로그인되려면 Authentication→Settings→승인된 도메인에 doonghwi.github.io가 있어야 함. 안드로이드는 무관.",
+      "level": "낮음 — 웹 구글로그인 쓸 때만"
     },
     {
       "date": "2026-06-11",
@@ -20,6 +20,10 @@
     }
   ],
   "inProgress": [
+    {
+      "task": "Firebase Auth 활성화 검증(익명 로그인 작동 확인) + Android/iOS OAuth 구성 반영·재빌드",
+      "state": "done"
+    },
     {
       "task": "공식 디스코드 초대링크 연결 + 상단 코인 토스트(탭 닫힘)",
       "state": "done"
