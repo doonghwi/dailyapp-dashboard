@@ -2,7 +2,7 @@
   "updated": "2026-06-15",
   "focus": {
     "app": "🎉 카우보이 파티",
-    "summary": "SELF-QA 자가진단 도입 → 8건 발견, P0/P1 전부 수정·재배포 완료 (오프라인 캐릭터 적용, 게임방법 갱신, 와이드 제한 등). 보안경보(Firebase 키)도 당일 조치 완료",
+    "summary": "신규 캐릭터 6종(러시안룰렛·쌍권총·부두·그림자·파파라치·???) + 의사 수정 + 턴20초 타이머 + 선물코드(thankyou=10만) 배포 완료. 파파라치 온라인 엿보기만 다음 작업.",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
   "actionNeeded": [
@@ -21,35 +21,27 @@
   ],
   "inProgress": [
     {
-      "task": "Firebase Auth 활성화 검증(익명 로그인 작동 확인) + Android/iOS OAuth 구성 반영·재빌드",
+      "task": "신규 캐릭터 6종 규칙엔진+UI+CPU+테스트(54+8건) 배포",
       "state": "done"
     },
     {
-      "task": "공식 디스코드 초대링크 연결 + 상단 코인 토스트(탭 닫힘)",
+      "task": "턴 20초 타이머(온/오프)+그림자(정보 은폐)",
       "state": "done"
     },
     {
-      "task": "SELF-QA 자가진단 프로세스 도입 (_make-new-app/SELF_QA.md, 출시 게이트 편입)",
+      "task": "선물코드 시스템(공용/단일·계정당 1회, thankyou=100000)",
       "state": "done"
     },
     {
-      "task": "QA 발견 8건 중 P0/P1 6건 수정·기기 재검증·재배포 (cowboy_party/QA_REPORT.md)",
+      "task": "??? 해금 게이트 + 의사 수정(버틴 즉시 0발)",
       "state": "done"
     },
     {
-      "task": "보안: GitHub 시크릿 경보 3건 조치 (키 앱제한 + 파일 untrack + push 자동스캔 훅)",
-      "state": "done"
-    },
-    {
-      "task": "카우보이 파티 대규모 업데이트 (캐릭터·랭킹·보상·방목록·사운드·iOS)",
-      "state": "done"
-    },
-    {
-      "task": "P2 백로그: 캐릭터 초상 일러스트 통일, 로비 경량 인덱스, 용어 통일",
+      "task": "파파라치 온라인 엿보기 페이즈(현재 오프라인만, 온라인 준비중)",
       "state": "todo"
     },
     {
-      "task": "유입 요소 구현 (GROWTH_CANDIDATES.md에서 사용자 선택 대기)",
+      "task": "유입 요소 구현 (GROWTH_CANDIDATES.md에서 선택 대기)",
       "state": "todo"
     }
   ],
