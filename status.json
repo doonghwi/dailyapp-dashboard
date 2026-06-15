@@ -8,12 +8,12 @@
   "sessions": [
     { "name": "🛡️ 보안", "id": "security", "mode": "상시 루프", "state": "starting", "note": "cowboy_party RTDB 규칙·인증·검증 계속 강화(동작 불변)" },
     { "name": "🚀 배포", "id": "deploy", "mode": "상시 루프(사용자 단계 직전 정지)", "state": "starting", "note": "스토어 제출 직전까지 준비, 사용자 단계는 아래 타임라인으로" },
-    { "name": "🎨 디자인", "id": "design", "mode": "상시 루프", "state": "starting", "note": "Figma 기반 신규 독립 레포 cowboy_redesign (기존 카우보이 불변)" },
+    { "name": "🎨 아트+이펙트", "id": "design", "mode": "상시 루프", "state": "starting", "note": "신규 독립 레포 cowboy_redesign: 코드 기반 이펙트 고도화(빵야·방어·덫) + 캐릭터 일러스트 생성·통합. 기존 카우보이 불변" },
     { "name": "📣 홍보", "id": "promo", "mode": "1회성", "state": "starting", "note": "홍보 자산 묶음 완성되면 종료" }
   ],
   "timeline": [
-    { "step": 0, "title": "Figma Personal Access Token 발급 → MCP 연결", "owner": "나", "state": "todo", "gate": false,
-      "detail": "디자인 세션을 Figma 주도로 굴리려면 토큰 필요. figma.com → Settings → Security → Personal access tokens 생성 후, 새 디자인 레포 폴더에서 'claude mcp add' 한 줄 실행(아래 안내). 없어도 디자인 세션은 자체 디자인시스템으로 계속 진행함." },
+    { "step": 0, "title": "Gemini 이미지 API 키 전달 (캐릭터 일러스트 자동생성용)", "owner": "나", "state": "todo", "gate": false,
+      "detail": "캐릭터 16종 일러스트를 클로드가 자동 생성하려면 Google AI Studio API 키(aistudio.google.com/apikey, 챗봇 구독 아님) 필요. 터미널: mkdir -p ~/.config/dailyapp && printf '%s' '키' > ~/.config/dailyapp/gemini.key && chmod 600 ~/.config/dailyapp/gemini.key. 없어도 이펙트·통합·플레이스홀더는 계속 진행. 이미지 생성은 소액 과금 가능성." },
     { "step": 1, "title": "Google Play 개발자 등록 ($25, 1회)", "owner": "나", "state": "todo", "gate": true,
       "detail": "play.google.com/console 에서 개발자 계정 등록. 안드로이드 출시 필수 전제." },
     { "step": 2, "title": "Apple Developer 등록 ($99/년)", "owner": "나", "state": "todo", "gate": true,
