@@ -2,14 +2,14 @@
   "updated": "2026-06-16",
   "focus": {
     "app": "🎉 카우보이",
-    "summary": "상시 루프 세션 4개 가동(보안·배포·디자인·홍보). 배포는 '내가 해야 할 것'만 남기고 정지, 디자인은 Figma 기반 신규 독립 레포(cowboy_redesign)에서 발전, 홍보는 자산 완성되면 종료. 아래 출시 타임라인에서 내 할 일 확인.",
+    "summary": "루프 세션 가동: 보안=규칙 하드닝 배포(안전범위 거의 소진), 배포=자동분 완료·사용자 6단계만 남아 대기, 아트+이펙트=cowboy_redesign 5화면 완성 후 이펙트 랩으로 피벗(이펙트 감사 중)·캐릭터 일러스트 통합 예정, 홍보=완료·종료. 스토어 캐릭터 수 오기(17→16) 정정. 아래 출시 타임라인에서 내 할 일 확인.",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
   "sessions": [
-    { "name": "🛡️ 보안", "id": "security", "mode": "상시 루프", "state": "starting", "note": "cowboy_party RTDB 규칙·인증·검증 계속 강화(동작 불변)" },
-    { "name": "🚀 배포", "id": "deploy", "mode": "상시 루프(사용자 단계 직전 정지)", "state": "starting", "note": "스토어 제출 직전까지 준비, 사용자 단계는 아래 타임라인으로" },
-    { "name": "🎨 아트+이펙트", "id": "design", "mode": "상시 루프", "state": "starting", "note": "신규 독립 레포 cowboy_redesign: 코드 기반 이펙트 고도화(빵야·방어·덫) + 캐릭터 일러스트 생성·통합. 기존 카우보이 불변" },
-    { "name": "📣 홍보", "id": "promo", "mode": "1회성", "state": "starting", "note": "홍보 자산 묶음 완성되면 종료" }
+    { "name": "🛡️ 보안", "id": "security", "mode": "상시 루프", "state": "running", "note": "규칙 하드닝 배포(charstats 인증요구 등). 규칙-only 안전범위 거의 소진 — 잔여는 Cloud Functions 필요(아래 개입필요 참고)" },
+    { "name": "🚀 배포", "id": "deploy", "mode": "상시 루프(사용자 단계 직전 정지)", "state": "paused", "note": "자동화 가능분 100% 완료. .aab 최신. 사용자 6단계만 남아 빌드 신선도 재점검 대기 중" },
+    { "name": "🎨 아트+이펙트", "id": "design", "mode": "상시 루프", "state": "running", "note": "cowboy_redesign(독립): 5화면 프로토타입 완성 후 이펙트 랩으로 피벗 — 현재 cowboy_party 이펙트 감사 중. 캐릭터 일러스트 통합 예정. 기존 카우보이 불변" },
+    { "name": "📣 홍보", "id": "promo", "mode": "1회성", "state": "done", "note": "완료: promo/ 태그라인·SNS글·랜딩카피·프레스킷(한/영) + SNS카드 2종. 세션 종료됨" }
   ],
   "timeline": [
     { "step": 0, "title": "캐릭터 일러스트 16종 만들어 넣기 (프롬프트는 클로드가 제공)", "owner": "나", "state": "todo", "gate": false,
@@ -30,6 +30,12 @@
       "detail": "store/ 문안·그래픽·스크린샷·데이터안전 답안 업로드 후 양 스토어에 최종 '제출'. 여기까지 오면 끝." }
   ],
   "actionNeeded": [
+    {
+      "date": "2026-06-16",
+      "title": "보안 잔여 2건 — 결정 필요(규칙만으로 불가)",
+      "detail": "보안 세션이 규칙-only로 가능한 하드닝은 모두 배포함. 남은 2건은 구조 변경/Cloud Functions가 있어야 근본 해결: ① 방 비밀번호가 평문·공개read(입장 인가를 Function으로 옮겨야) ② 선물코드 공개read 열거(제3자 선점 가능). 토이앱 수준이면 현 상태 수용도 가능 — 갈지 말지 결정 필요.",
+      "level": "낮음~중간 — 정식 출시 규모면 권장"
+    },
     {
       "date": "2026-06-15",
       "title": "(웹만) 승인된 도메인 확인",
