@@ -2,7 +2,7 @@
   "updated": "2026-06-15",
   "focus": {
     "app": "🎉 카우보이",
-    "summary": "카우보이 빠른시작 매칭 실패 근본원인 해결 = 기기 시계 어긋남(친구폰끼리 seen/createdAt을 stale로 오판). 매칭 전 서버시계 동기화(_ensureTimeSync)로 수정·REST로 재현 검증. + 버그 6종(저주 좌석별·더블빵야 화살표·닉네임 유일성·???준비자 공개·파파라치 사용량). analyze 0 / 79 테스트. web+APK 재배포.",
+    "summary": "카우보이 UI/필터 3종(에뮬 직접 확인): 한글 비속어 차단(정규화 \\W가 한글을 지우던 버그)·방만들기 배경 전체 채움·닉네임 변경권 상점 맨아래 이동. 직전엔 매칭 실패 근본원인(기기 시계 어긋남) 해결. analyze 0 / 82 테스트. web+APK 재배포.",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
   "actionNeeded": [
