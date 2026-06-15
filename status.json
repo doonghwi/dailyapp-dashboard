@@ -1,10 +1,34 @@
 {
-  "updated": "2026-06-15",
+  "updated": "2026-06-16",
   "focus": {
     "app": "🎉 카우보이",
-    "summary": "카우보이 UI/필터 3종(에뮬 직접 확인): 한글 비속어 차단(정규화 \\W가 한글을 지우던 버그)·방만들기 배경 전체 채움·닉네임 변경권 상점 맨아래 이동. 직전엔 매칭 실패 근본원인(기기 시계 어긋남) 해결. analyze 0 / 82 테스트. web+APK 재배포.",
+    "summary": "상시 루프 세션 4개 가동(보안·배포·디자인·홍보). 배포는 '내가 해야 할 것'만 남기고 정지, 디자인은 Figma 기반 신규 독립 레포(cowboy_redesign)에서 발전, 홍보는 자산 완성되면 종료. 아래 출시 타임라인에서 내 할 일 확인.",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
+  "sessions": [
+    { "name": "🛡️ 보안", "id": "security", "mode": "상시 루프", "state": "starting", "note": "cowboy_party RTDB 규칙·인증·검증 계속 강화(동작 불변)" },
+    { "name": "🚀 배포", "id": "deploy", "mode": "상시 루프(사용자 단계 직전 정지)", "state": "starting", "note": "스토어 제출 직전까지 준비, 사용자 단계는 아래 타임라인으로" },
+    { "name": "🎨 디자인", "id": "design", "mode": "상시 루프", "state": "starting", "note": "Figma 기반 신규 독립 레포 cowboy_redesign (기존 카우보이 불변)" },
+    { "name": "📣 홍보", "id": "promo", "mode": "1회성", "state": "starting", "note": "홍보 자산 묶음 완성되면 종료" }
+  ],
+  "timeline": [
+    { "step": 0, "title": "Figma Personal Access Token 발급 → MCP 연결", "owner": "나", "state": "todo", "gate": false,
+      "detail": "디자인 세션을 Figma 주도로 굴리려면 토큰 필요. figma.com → Settings → Security → Personal access tokens 생성 후, 새 디자인 레포 폴더에서 'claude mcp add' 한 줄 실행(아래 안내). 없어도 디자인 세션은 자체 디자인시스템으로 계속 진행함." },
+    { "step": 1, "title": "Google Play 개발자 등록 ($25, 1회)", "owner": "나", "state": "todo", "gate": true,
+      "detail": "play.google.com/console 에서 개발자 계정 등록. 안드로이드 출시 필수 전제." },
+    { "step": 2, "title": "Apple Developer 등록 ($99/년)", "owner": "나", "state": "todo", "gate": true,
+      "detail": "developer.apple.com 멤버십. iOS 출시 필수 전제." },
+    { "step": 3, "title": "Android 업로드 키스토어 생성·비밀 보관 → 서명 .aab", "owner": "나", "state": "todo", "gate": true,
+      "detail": "android/key.properties.example 따라 keytool 실행 → android/key.properties 작성(커밋 금지) → flutter build appbundle --release. 키/비번은 본인만 보관." },
+    { "step": 4, "title": "Firebase 콘솔: Apple 공급자 켜기 + iOS 앱 등록", "owner": "나", "state": "todo", "gate": true,
+      "detail": "Authentication에서 Apple 공급자 ON(Apple Service ID/키). iOS 앱 등록 후 GoogleService-Info.plist를 ios/Runner/에 배치(커밋 금지)." },
+    { "step": 5, "title": "Xcode: Sign in with Apple capability + 서명팀 → ipa 업로드", "owner": "나", "state": "todo", "gate": true,
+      "detail": "Xcode에서 capability 추가·서명팀 선택 → flutter build ipa --release → App Store Connect 업로드." },
+    { "step": 6, "title": "iOS 스크린샷 (시뮬레이터 규격)", "owner": "나", "state": "todo", "gate": false,
+      "detail": "6.7\"/6.9\" 등 규격으로 시뮬레이터 캡처. store/ios_release.md 규격 참고. 안드로이드 스크린샷은 이미 준비됨." },
+    { "step": 7, "title": "스토어 콘솔 자산 업로드 + 최종 제출", "owner": "나", "state": "todo", "gate": true,
+      "detail": "store/ 문안·그래픽·스크린샷·데이터안전 답안 업로드 후 양 스토어에 최종 '제출'. 여기까지 오면 끝." }
+  ],
   "actionNeeded": [
     {
       "date": "2026-06-15",

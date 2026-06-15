@@ -50,6 +50,25 @@
   .act .t{font-weight:800} .act .lv{font-size:.75rem;color:var(--muted)}
   .focusbox{font-size:1.05rem} .focusbox .app{background:none;border:none;box-shadow:none;padding:0}
   .empty-ok{color:var(--sage);font-weight:700}
+  /* sessions */
+  .sess-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+  .sess{border:1px solid #d8c08a;border-radius:12px;padding:12px;background:#fbf4e2}
+  .sess .nm{font-weight:800;font-size:1rem}
+  .sess .md{font-size:.72rem;color:var(--muted);margin:2px 0 6px}
+  .sess .nt{font-size:.82rem;color:#5a4a30}
+  .sdot{display:inline-block;font-size:.72rem;font-weight:800;padding:2px 8px;border-radius:999px;margin-left:6px}
+  .s-running{background:#dff3e9;color:var(--sage)} .s-starting{background:#f3e6cf;color:var(--rust)}
+  .s-paused{background:#e7e0f0;color:#6a4a9e} .s-done{background:#e0e0e0;color:#555} .s-stalled{background:#fde0d8;color:var(--danger)}
+  /* timeline */
+  .tl-row{display:flex;gap:12px;padding:10px 6px;border-bottom:1px dashed var(--line);align-items:flex-start}
+  .tl-row:last-child{border-bottom:none}
+  .tl-num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--leather);color:#fff;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center}
+  .tl-num.done{background:var(--sage)} .tl-num.gate{background:var(--danger)}
+  .tl-body{flex:1}
+  .tl-title{font-weight:800}
+  .tl-meta{font-size:.72rem;color:var(--muted);margin-left:6px;font-weight:600}
+  .tl-detail{font-size:.83rem;color:#5a4a30;margin-top:2px}
+  .tl-done .tl-title{text-decoration:line-through;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -64,6 +83,18 @@
   <section>
     <h2>🎯 지금 상태</h2>
     <div class="panel" id="focus">불러오는 중…</div>
+  </section>
+
+  <section>
+    <h2>🔁 가동 중인 세션</h2>
+    <p class="hint">상시 루프로 앱을 계속 발전시키는 자동 세션들. 마스터가 주기적으로 모니터링·갱신.</p>
+    <div class="panel" id="sessions">불러오는 중…</div>
+  </section>
+
+  <section>
+    <h2>🗺️ 출시까지 내 타임라인</h2>
+    <p class="hint">최종 스토어 제출까지 <b>사용자(사장님)가 직접 해야 하는</b> 단계 순서. Claude는 이 직전까지 전부 준비해 둠. 🔒=앞 단계 완료 필요(게이트).</p>
+    <div class="panel" id="timeline">불러오는 중…</div>
   </section>
 
   <section>
@@ -222,6 +253,22 @@ function renderStatus(st){
     : '<div class="empty-ok">✅ 지금 개입할 일 없음 — Claude가 알아서 진행 중</div>';
   const ICON={done:'✅',doing:'🔨',todo:'⬜'};
   P.innerHTML = (st.inProgress||[]).map(p=>`<div class="st-row st-${p.state}">${ICON[p.state]||'⬜'} ${p.task}</div>`).join('');
+
+  // 세션 현황
+  const S=document.getElementById('sessions');
+  const SLAB={running:'가동중',starting:'시작중',paused:'대기',done:'완료',stalled:'멈춤'};
+  if(S){ S.innerHTML = (st.sessions&&st.sessions.length)
+    ? `<div class="sess-grid">`+st.sessions.map(s=>`<div class="sess"><div class="nm">${s.name}<span class="sdot s-${s.state}">${SLAB[s.state]||s.state}</span></div><div class="md">${s.mode||''}</div><div class="nt">${s.note||''}</div></div>`).join('')+`</div>`
+    : '<p class="hint">가동 중인 세션 없음.</p>'; }
+
+  // 출시 타임라인 (사용자 단계)
+  const T=document.getElementById('timeline');
+  if(T){ const tl=st.timeline||[];
+    T.innerHTML = tl.length
+      ? tl.map(t=>{const done=t.state==='done';const cls=done?'done':(t.gate?'gate':'');
+          return `<div class="tl-row ${done?'tl-done':''}"><div class="tl-num ${cls}">${done?'✓':t.step}</div><div class="tl-body"><span class="tl-title">${t.title}</span><span class="tl-meta">${t.gate?'🔒 ':''}${t.owner||'나'}</span><div class="tl-detail">${t.detail||''}</div></div></div>`;
+        }).join('')
+      : '<p class="hint">타임라인 항목 없음.</p>'; }
 }
 fetch('status.json?v='+Date.now()).then(r=>r.json()).then(renderStatus).catch(()=>renderStatus(null));
 
