@@ -2,7 +2,7 @@
   "updated": "2026-06-15",
   "focus": {
     "app": "🎉 카우보이",
-    "summary": "카우보이 버그 6종 수정 배포 — 빠른시작 매칭 수렴(동시탭 레이스 해결)·부두저주 좌석별 독립·더블빵야 화살표 2개·닉네임 전역 유일성·???→준비자 즉시공개·파파라치 사용량 1→0. analyze 0 / 79 테스트. web 재배포+APK+DB규칙 배포.",
+    "summary": "카우보이 빠른시작 매칭 실패 근본원인 해결 = 기기 시계 어긋남(친구폰끼리 seen/createdAt을 stale로 오판). 매칭 전 서버시계 동기화(_ensureTimeSync)로 수정·REST로 재현 검증. + 버그 6종(저주 좌석별·더블빵야 화살표·닉네임 유일성·???준비자 공개·파파라치 사용량). analyze 0 / 79 테스트. web+APK 재배포.",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
   "actionNeeded": [
