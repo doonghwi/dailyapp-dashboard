@@ -12,8 +12,8 @@
     { "name": "📣 홍보", "id": "promo", "mode": "1회성", "state": "starting", "note": "홍보 자산 묶음 완성되면 종료" }
   ],
   "timeline": [
-    { "step": 0, "title": "Gemini 이미지 API 키 전달 (캐릭터 일러스트 자동생성용)", "owner": "나", "state": "todo", "gate": false,
-      "detail": "캐릭터 16종 일러스트를 클로드가 자동 생성하려면 Google AI Studio API 키(aistudio.google.com/apikey, 챗봇 구독 아님) 필요. 터미널: mkdir -p ~/.config/dailyapp && printf '%s' '키' > ~/.config/dailyapp/gemini.key && chmod 600 ~/.config/dailyapp/gemini.key. 없어도 이펙트·통합·플레이스홀더는 계속 진행. 이미지 생성은 소액 과금 가능성." },
+    { "step": 0, "title": "캐릭터 일러스트 16종 만들어 넣기 (프롬프트는 클로드가 제공)", "owner": "나", "state": "todo", "gate": false,
+      "detail": "프롬프트 준비됨: cowboy_redesign/art/CHARACTER_PROMPTS.md (공통 스타일 블록 + 16종). 원하는 이미지툴로 생성 → 1:1 PNG로 cowboy_redesign/assets/characters/<id>.png 저장(id=캐릭터 영문). 디자인 세션이 상점·게임좌석에 자동 통합, 없는 건 플레이스홀더로 표시. 일러스트 없어도 이펙트 고도화는 계속 진행." },
     { "step": 1, "title": "Google Play 개발자 등록 ($25, 1회)", "owner": "나", "state": "todo", "gate": true,
       "detail": "play.google.com/console 에서 개발자 계정 등록. 안드로이드 출시 필수 전제." },
     { "step": 2, "title": "Apple Developer 등록 ($99/년)", "owner": "나", "state": "todo", "gate": true,
