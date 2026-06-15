@@ -8,12 +8,12 @@
   "sessions": [
     { "name": "🛡️ 보안", "id": "security", "mode": "상시 루프", "state": "running", "note": "규칙 하드닝 전부 배포(charstats 인증요구·nickname 키길이 캡·seasons 점수캡 회귀검증). 규칙-only 안전범위 소진 — 잔여는 Cloud Functions 필요(아래 개입필요), 현재 재검증 루프" },
     { "name": "🚀 배포", "id": "deploy", "mode": "상시 루프(사용자 단계 직전 정지)", "state": "paused", "note": "자동화 가능분 100% 완료. .aab 최신. 사용자 6단계만 남아 빌드 신선도 재점검 대기 중" },
-    { "name": "🎨 아트+이펙트", "id": "design", "mode": "상시 루프", "state": "running", "note": "cowboy_redesign(독립): 코드 이펙트 시스템 구축 중 — 빵야/슈퍼빵야(셰이더 빔+Flame 파티클+임팩트) 완료, 방어링·덫·연막·저주 진행 예정. 캐릭터 일러스트는 사장님 PNG 대기. 기존 카우보이 불변" },
+    { "name": "🎨 아트+이펙트", "id": "design", "mode": "상시 루프", "state": "running", "note": "cowboy_redesign(독립): 이펙트 시스템 구축 중(빵야/슈퍼빵야 완료, 방어·덫·연막 진행) + 캐릭터 일러스트 16종(한국 웹툰체) 투입됨 → 상점 카드·게임 좌석 통합 중. 기존 카우보이 불변" },
     { "name": "📣 홍보", "id": "promo", "mode": "1회성", "state": "done", "note": "완료: promo/ 태그라인·SNS글·랜딩카피·프레스킷(한/영) + SNS카드 2종. 세션 종료됨" }
   ],
   "timeline": [
-    { "step": 0, "title": "캐릭터 일러스트 16종 만들어 넣기 (프롬프트는 클로드가 제공)", "owner": "나", "state": "todo", "gate": false,
-      "detail": "프롬프트 v2(한국 모바일게임/웹툰풍) 준비됨: cowboy_redesign/art/CHARACTER_PROMPTS.md. 팁: 레퍼런스 이미지를 style-ref로 첨부 + NijiJourney/MJ --niji 권장. 1:1 PNG로 cowboy_redesign/assets/characters/<id>.png 저장(id=캐릭터 영문). 디자인 세션이 상점·게임좌석에 자동 통합, 없는 건 플레이스홀더. 일러스트 없어도 이펙트 고도화는 계속 진행." },
+    { "step": 0, "title": "캐릭터 일러스트 16종 만들어 넣기 (프롬프트는 클로드가 제공)", "owner": "나", "state": "done", "gate": false,
+      "detail": "✅ 완료 — 16종(한국 웹툰체 v3) 전부 제작·투입됨. cowboy_redesign/assets/characters/<id>.png 16개 배치 완료. 디자인 세션이 상점 카드·게임 좌석에 통합 진행 중(클로드 몫)." },
     { "step": 1, "title": "Google Play 개발자 등록 ($25, 1회)", "owner": "나", "state": "todo", "gate": true,
       "detail": "play.google.com/console 에서 개발자 계정 등록. 안드로이드 출시 필수 전제." },
     { "step": 2, "title": "Apple Developer 등록 ($99/년)", "owner": "나", "state": "todo", "gate": true,
