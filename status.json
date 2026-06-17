@@ -2,7 +2,7 @@
   "updated": "2026-06-17",
   "focus": {
     "app": "🎉 카우보이",
-    "summary": "사용자 제보 6건 전부 수정 완료(test 170): ???공개 보정·저주 재시전 무효·승률사이트(cowboy.gg)·Pretendard 폰트·사막 배경 개선·첫실행 튜토리얼 팝업. 공지도 사용자 친화로 갱신. 지금 web 재배포 중(라이브 반영). 벤치마킹 루프(uxresearch)는 UX_IDEAS 60개 누적+ntfy 발송 중. 출시 서명 .aab는 사용자 키스토어 필요(타임라인). 출시는 사용자 6단계만 남음.",
+    "summary": "사용자 제보 6건 전부 수정 완료(test 170): ???공개 보정·저주 재시전 무효·승률사이트(cowboy.gg)·Pretendard 폰트·사막 배경 개선·첫실행 튜토리얼 팝업. 공지도 사용자 친화로 갱신. web 재배포 완료(흰화면 스모크 통과·라이브 200 OK). 벤치마킹 루프(uxresearch)는 UX_IDEAS 60개 누적+ntfy 발송 중. 출시 서명 .aab는 사용자 키스토어 필요(타임라인). 출시는 사용자 6단계만 남음.",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
   "sessions": [
@@ -39,7 +39,7 @@
       "id": "bugloop",
       "mode": "상시 루프",
       "state": "running",
-      "note": "✅사용자 제보 6건 완료: ???공개 보정(평화/결투는 능력발동시만)·저주 재시전 무효·cowboy.gg 승률사이트·Pretendard 폰트·사막배경 개선·첫실행 튜토리얼 팝업+배너 축소. test 170, 공지 갱신. web 재배포 진행 중. 이후 reveal/curse 엣지 헌팅 재개. (서명 .aab는 사용자 키스토어 필요)"
+      "note": "✅사용자 제보 6건 완료: ???공개 보정(평화/결투는 능력발동시만)·저주 재시전 무효·cowboy.gg 승률사이트·Pretendard 폰트·사막배경 개선·첫실행 튜토리얼 팝업+배너 축소. test 170, 공지 갱신. web 재배포 완료(스모크 통과·라이브). reveal/curse 엣지 헌팅 재개. (서명 .aab는 사용자 키스토어 필요)"
     },
     {
       "name": "🔍 벤치마킹(UX)",
