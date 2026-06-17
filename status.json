@@ -1,35 +1,119 @@
 {
-  "updated": "2026-06-16",
+  "updated": "2026-06-17",
   "focus": {
     "app": "🎉 카우보이",
-    "summary": "프로토타입(cowboy_redesign)에서 검증된 이펙트·캐릭터 일러스트가 좋다고 확정 → 본게임(cowboy_party) 이식 시작(port 세션, 단계별: 일러스트→상점 상세→이펙트→디자인 일관성, 게임로직 불변). 보안=규칙 하드닝 배포·재검증, 배포=자동분 완료·사용자 6단계 대기, 홍보=완료. 디자인은 Figma 없이 코드 디자인시스템+스크린샷 반복. 아래 출시 타임라인 확인.",
+    "summary": "버그헌팅(ralph) 가동: ???(mystery) 영구 미공개 버그 수정 + 룰엔진 퍼즈 하니스(4000판 불변식 위반 0), 계속 봇전 QA·엣지케이스로 신규 버그 탐지 중. 이식=이펙트 전면 업그레이드+상점 상세+일러스트 완료, 디자인 일관성(P4) 진행. 보안=규칙 하드닝·재검증, 배포=자동분 완료·사용자 6단계 대기. 인앱 공지는 사용자 친화 내용만(기술 안내 금지). 아래 출시 타임라인 확인.",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
   "sessions": [
-    { "name": "🛡️ 보안", "id": "security", "mode": "상시 루프", "state": "running", "note": "규칙 하드닝 전부 배포(charstats 인증요구·nickname 키길이 캡·seasons 점수캡 회귀검증). 규칙-only 안전범위 소진 — 잔여는 Cloud Functions 필요(아래 개입필요), 현재 재검증 루프" },
-    { "name": "🚀 배포", "id": "deploy", "mode": "상시 루프(사용자 단계 직전 정지)", "state": "paused", "note": "자동화 가능분 100% 완료. .aab 최신. 사용자 6단계만 남아 빌드 신선도 재점검 대기 중" },
-    { "name": "🎨 아트+이펙트(프로토타입)", "id": "design", "mode": "마일스톤", "state": "done", "note": "cowboy_redesign(독립): 이펙트 풀세트(빵야/슈퍼빵야/방어/덫/연막/저주) + 캐릭터 일러스트 16종(한국 웹툰체) + 5화면 완성. 검증됨 → 본게임 이식 시작" },
-    { "name": "🔧 본게임 이식", "id": "port", "mode": "단계 진행", "state": "running", "note": "P1 일러스트 ✅ · P2 상점 캐릭터 상세 ✅ · P3 연막 이펙트 ✅ · P4 디자인 일관성 ✅. **이펙트 전면 업그레이드 ✅**: (A) 연막 버그수정(발동마다 결정적 표출) (B) 빵야 머즐+탄도+명중/방어/빗나감 임팩트·슈퍼빔·방어 충격파·장전 탄피 (C) 의사 자힐·리셋 무효·부두 저주 오라·스나이퍼 관통 — 전부 Canvas-only(flame/셰이더 미도입), 기존 리빌 플래그서 유도. (D) 좌석 배지 겹침 수정 (E) 전 특수행동 '연막 퀄' 통일: 머즐 파티클·룰렛 스핀·저주 테더. (F) 룰렛 자기-꽝 모션(rouletteSelf 노출+RouletteBust). (G) 에뮬 라이브 검증: 효과 강하게 잘 뜸(빔 굵고 밝음) 확인, 약한 것 없음 → 사용자 '룰렛만 바뀜' 체감은 웹 캐시(강력 새로고침 필요). analyze 0/test 92, 웹 재배포. 게임로직 0줄 변경" },
-    { "name": "🐛 버그헌팅(ralph)", "id": "bugloop", "mode": "상시 루프", "state": "running", "note": "다양한 직업조합 반복 시뮬·봇전으로 버그 탐지·수정. 1차 타깃: ???(mystery) 정체 미공개(트리거 없는 직업) — 근본원인 규명·등록됨. + 룰엔진 퍼즈/속성테스트 하니스로 불변식 위반 자동탐지. BUGS.md 큐 처리" },
-    { "name": "📣 홍보", "id": "promo", "mode": "1회성", "state": "done", "note": "완료: promo/ 태그라인·SNS글·랜딩카피·프레스킷(한/영) + SNS카드 2종. 세션 종료됨" }
+    {
+      "name": "🛡️ 보안",
+      "id": "security",
+      "mode": "상시 루프",
+      "state": "running",
+      "note": "규칙 하드닝 전부 배포(charstats 인증요구·nickname 키길이 캡·seasons 점수캡 회귀검증). 규칙-only 안전범위 소진 — 잔여는 Cloud Functions 필요(아래 개입필요), 현재 재검증 루프"
+    },
+    {
+      "name": "🚀 배포",
+      "id": "deploy",
+      "mode": "상시 루프(사용자 단계 직전 정지)",
+      "state": "paused",
+      "note": "자동화 가능분 100% 완료. .aab 최신. 사용자 6단계만 남아 빌드 신선도 재점검 대기 중"
+    },
+    {
+      "name": "🎨 아트+이펙트(프로토타입)",
+      "id": "design",
+      "mode": "마일스톤",
+      "state": "done",
+      "note": "cowboy_redesign(독립): 이펙트 풀세트(빵야/슈퍼빵야/방어/덫/연막/저주) + 캐릭터 일러스트 16종(한국 웹툰체) + 5화면 완성. 검증됨 → 본게임 이식 시작"
+    },
+    {
+      "name": "🔧 본게임 이식",
+      "id": "port",
+      "mode": "단계 진행",
+      "state": "running",
+      "note": "P1 일러스트 ✅ · P2 상점 캐릭터 상세 ✅ · P3 연막 이펙트 ✅ · P4 디자인 일관성 ✅. **이펙트 전면 업그레이드 ✅**: (A) 연막 버그수정(발동마다 결정적 표출) (B) 빵야 머즐+탄도+명중/방어/빗나감 임팩트·슈퍼빔·방어 충격파·장전 탄피 (C) 의사 자힐·리셋 무효·부두 저주 오라·스나이퍼 관통 — 전부 Canvas-only(flame/셰이더 미도입), 기존 리빌 플래그서 유도. (D) 좌석 배지 겹침 수정 (E) 전 특수행동 '연막 퀄' 통일: 머즐 파티클·룰렛 스핀·저주 테더. (F) 룰렛 자기-꽝 모션(rouletteSelf 노출+RouletteBust). (G) 에뮬 라이브 검증: 효과 강하게 잘 뜸(빔 굵고 밝음) 확인, 약한 것 없음 → 사용자 '룰렛만 바뀜' 체감은 웹 캐시(강력 새로고침 필요). analyze 0/test 92, 웹 재배포. 게임로직 0줄 변경"
+    },
+    {
+      "name": "🐛 버그헌팅(ralph)",
+      "id": "bugloop",
+      "mode": "상시 루프",
+      "state": "running",
+      "note": "✅ ???(mystery) 영구 미공개 버그 수정(순수함수 mysteryRevealsAtStart + 시작공개∪턴트리거==전체 단위테스트, 온라인 전용 버그) ✅ 룰엔진 퍼즈 하니스(4000판×80턴 불변식 검사, 위반 0·회귀가드 상주). 진행: 봇전 QA + 퍼즈 엣지케이스 확장(결투 동점·더블타깃·엿보기·다중저주)으로 신규 버그 계속 탐지"
+    },
+    {
+      "name": "📣 홍보",
+      "id": "promo",
+      "mode": "1회성",
+      "state": "done",
+      "note": "완료: promo/ 태그라인·SNS글·랜딩카피·프레스킷(한/영) + SNS카드 2종. 세션 종료됨"
+    }
   ],
   "timeline": [
-    { "step": 0, "title": "캐릭터 일러스트 16종 만들어 넣기 (프롬프트는 클로드가 제공)", "owner": "나", "state": "done", "gate": false,
-      "detail": "✅ 완료 — 16종(한국 웹툰체 v3) 전부 제작·투입됨. cowboy_redesign/assets/characters/<id>.png 16개 배치 완료. 디자인 세션이 상점 카드·게임 좌석에 통합 진행 중(클로드 몫)." },
-    { "step": 1, "title": "Google Play 개발자 등록 ($25, 1회)", "owner": "나", "state": "todo", "gate": true,
-      "detail": "play.google.com/console 에서 개발자 계정 등록. 안드로이드 출시 필수 전제." },
-    { "step": 2, "title": "Apple Developer 등록 ($99/년)", "owner": "나", "state": "todo", "gate": true,
-      "detail": "developer.apple.com 멤버십. iOS 출시 필수 전제." },
-    { "step": 3, "title": "Android 업로드 키스토어 생성·비밀 보관 → 서명 .aab", "owner": "나", "state": "todo", "gate": true,
-      "detail": "android/key.properties.example 따라 keytool 실행 → android/key.properties 작성(커밋 금지) → flutter build appbundle --release. 키/비번은 본인만 보관." },
-    { "step": 4, "title": "Firebase 콘솔: Apple 공급자 켜기 + iOS 앱 등록", "owner": "나", "state": "todo", "gate": true,
-      "detail": "Authentication에서 Apple 공급자 ON(Apple Service ID/키). iOS 앱 등록 후 GoogleService-Info.plist를 ios/Runner/에 배치(커밋 금지)." },
-    { "step": 5, "title": "Xcode: Sign in with Apple capability + 서명팀 → ipa 업로드", "owner": "나", "state": "todo", "gate": true,
-      "detail": "Xcode에서 capability 추가·서명팀 선택 → flutter build ipa --release → App Store Connect 업로드." },
-    { "step": 6, "title": "iOS 스크린샷 (시뮬레이터 규격)", "owner": "나", "state": "todo", "gate": false,
-      "detail": "6.7\"/6.9\" 등 규격으로 시뮬레이터 캡처. store/ios_release.md 규격 참고. 안드로이드 스크린샷은 이미 준비됨." },
-    { "step": 7, "title": "스토어 콘솔 자산 업로드 + 최종 제출", "owner": "나", "state": "todo", "gate": true,
-      "detail": "store/ 문안·그래픽·스크린샷·데이터안전 답안 업로드 후 양 스토어에 최종 '제출'. 여기까지 오면 끝." }
+    {
+      "step": 0,
+      "title": "캐릭터 일러스트 16종 만들어 넣기 (프롬프트는 클로드가 제공)",
+      "owner": "나",
+      "state": "done",
+      "gate": false,
+      "detail": "✅ 완료 — 16종(한국 웹툰체 v3) 전부 제작·투입됨. cowboy_redesign/assets/characters/<id>.png 16개 배치 완료. 디자인 세션이 상점 카드·게임 좌석에 통합 진행 중(클로드 몫)."
+    },
+    {
+      "step": 1,
+      "title": "Google Play 개발자 등록 ($25, 1회)",
+      "owner": "나",
+      "state": "todo",
+      "gate": true,
+      "detail": "play.google.com/console 에서 개발자 계정 등록. 안드로이드 출시 필수 전제."
+    },
+    {
+      "step": 2,
+      "title": "Apple Developer 등록 ($99/년)",
+      "owner": "나",
+      "state": "todo",
+      "gate": true,
+      "detail": "developer.apple.com 멤버십. iOS 출시 필수 전제."
+    },
+    {
+      "step": 3,
+      "title": "Android 업로드 키스토어 생성·비밀 보관 → 서명 .aab",
+      "owner": "나",
+      "state": "todo",
+      "gate": true,
+      "detail": "android/key.properties.example 따라 keytool 실행 → android/key.properties 작성(커밋 금지) → flutter build appbundle --release. 키/비번은 본인만 보관."
+    },
+    {
+      "step": 4,
+      "title": "Firebase 콘솔: Apple 공급자 켜기 + iOS 앱 등록",
+      "owner": "나",
+      "state": "todo",
+      "gate": true,
+      "detail": "Authentication에서 Apple 공급자 ON(Apple Service ID/키). iOS 앱 등록 후 GoogleService-Info.plist를 ios/Runner/에 배치(커밋 금지)."
+    },
+    {
+      "step": 5,
+      "title": "Xcode: Sign in with Apple capability + 서명팀 → ipa 업로드",
+      "owner": "나",
+      "state": "todo",
+      "gate": true,
+      "detail": "Xcode에서 capability 추가·서명팀 선택 → flutter build ipa --release → App Store Connect 업로드."
+    },
+    {
+      "step": 6,
+      "title": "iOS 스크린샷 (시뮬레이터 규격)",
+      "owner": "나",
+      "state": "todo",
+      "gate": false,
+      "detail": "6.7\"/6.9\" 등 규격으로 시뮬레이터 캡처. store/ios_release.md 규격 참고. 안드로이드 스크린샷은 이미 준비됨."
+    },
+    {
+      "step": 7,
+      "title": "스토어 콘솔 자산 업로드 + 최종 제출",
+      "owner": "나",
+      "state": "todo",
+      "gate": true,
+      "detail": "store/ 문안·그래픽·스크린샷·데이터안전 답안 업로드 후 양 스토어에 최종 '제출'. 여기까지 오면 끝."
+    }
   ],
   "actionNeeded": [
     {
