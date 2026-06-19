@@ -2,7 +2,7 @@
   "updated": "2026-06-19",
   "focus": {
     "app": "🎉 카우보이",
-    "summary": "버그헌팅 단독 안전망(라이트 워치): 11사이클 연속 새 실버그 0 — 사실상 할 일 없음(앱 견고, test 175+). 누적 실결함 5건 수정·라이브, web 200. 벤치마킹은 로드맵 산출 완료로 종료. 사용자 제보 6건 라이브. 출시는 사용자 6단계만 남음. **다음 생산적 진행을 위해 사용자 방향 권장**(UX 로드맵 구현/새 기능/출시 진행).",
+    "summary": "🚀 안드로이드 출시 진행 중: Google Play 개발자 등록 완료, 업로드 키스토어 생성 + 서명된 .aab 빌드·검증 완료(업로드키 서명 확인). 남은 사용자 단계=Play 콘솔에서 앱 만들기→등록정보·데이터안전·콘텐츠등급→.aab 업로드→제출. 버그헌팅은 50사이클째 새 실버그 0(안정), 누적 실결함 5건 수정·라이브, test 175+.",
     "link": "https://doonghwi.github.io/cowboy-party/"
   },
   "sessions": [
@@ -39,7 +39,7 @@
       "id": "bugloop",
       "mode": "상시 루프",
       "state": "running",
-      "note": "완전 수렴(49사이클 연속 새버그0·변화없음). 누적 실결함 5건 수정·라이브, test 175+. 안전망 라이트 워치. 새 버그/제보 시 즉시 처리."
+      "note": "완전 수렴(50사이클 연속 새버그0). 누적 실결함 5건 수정·라이브, test 175+. 안전망 라이트 워치."
     },
     {
       "name": "🔍 벤치마킹(UX)",
@@ -69,9 +69,9 @@
       "step": 1,
       "title": "Google Play 개발자 등록 ($25, 1회)",
       "owner": "나",
-      "state": "todo",
+      "state": "done",
       "gate": true,
-      "detail": "play.google.com/console 에서 개발자 계정 등록. 안드로이드 출시 필수 전제."
+      "detail": "✅ Google Play 개발자 등록 완료(개인 계정)."
     },
     {
       "step": 2,
@@ -85,9 +85,9 @@
       "step": 3,
       "title": "Android 업로드 키스토어 생성·비밀 보관 → 서명 .aab",
       "owner": "나",
-      "state": "todo",
+      "state": "done",
       "gate": true,
-      "detail": "android/key.properties.example 따라 keytool 실행 → android/key.properties 작성(커밋 금지) → flutter build appbundle --release. 키/비번은 본인만 보관."
+      "detail": "✅ 업로드 키스토어(~/cowboy-upload.jks) 생성 + key.properties + 서명된 app-release.aab 빌드·서명검증 완료(업로드키 SHA1 일치). 키스토어·비번 백업 필수. Play 앱서명이라 분실시 재설정 가능."
     },
     {
       "step": 4,
