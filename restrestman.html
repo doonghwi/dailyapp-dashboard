@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🌙 DailyApp 빌드로그 — 쉬었음쉬었음 (restrest)</title>
+<style>
+  :root{ --bg:#FBF6EF; --card:#fff; --text:#2B2622; --muted:#6B6258; --accent:#E8693C; --sage:#7FA37E; --gold:#E8B23C; --border:#ECE3D7; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+  header{display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--border);padding-bottom:18px}
+  .badge{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#F3A06A,#E8693C);
+    display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 6px 18px rgba(232,105,60,.28)}
+  h1{font-size:1.7rem;margin:0}
+  .sub{color:var(--muted);font-size:.92rem}
+  .updated{color:var(--muted);font-size:.83rem;margin-top:4px}
+  .updated a{color:var(--accent);text-decoration:none}
+  section{margin-top:30px}
+  h2{font-size:1.2rem;border-left:5px solid var(--accent);padding-left:11px;margin-bottom:14px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px}
+  .card .n{font-size:1.25rem;font-weight:800;color:var(--accent)}
+  .card .l{font-size:.82rem;color:var(--muted);margin-top:2px}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:6px 18px}
+  table{width:100%;border-collapse:collapse;font-size:.93rem}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+  th{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.5px}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+  .d-done{background:var(--sage)} .d-prog{background:var(--gold)} .d-todo{background:#C9BEB0}
+  .links a{display:inline-block;margin:0 14px 8px 0;color:var(--accent);text-decoration:none;font-weight:600}
+  .foot{color:var(--muted);font-size:.82rem;margin-top:40px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badge">🌙</div>
+    <div>
+      <h1>쉬었음쉬었음 <span style="font-size:.7em;color:var(--muted)">(restrest)</span></h1>
+      <div class="sub">하루 두 번 의미있는 순간을 사진으로 기록·공유 + 그룹 책임감(BeReal식)</div>
+      <div class="updated">Day 5 · Android/온라인 · 갱신 2026-06-30 · <a href="index.html">← 대시보드</a></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>한눈에</h2>
+    <div class="cards">
+      <div class="card"><div class="n">완성</div><div class="l">기능·실기기 e2e 검증</div></div>
+      <div class="card"><div class="n">5탭</div><div class="l">제안·캘린더·기록·피드백·설정</div></div>
+      <div class="card"><div class="n">무료</div><div class="l">RTDB+Cloudinary+FCM cron</div></div>
+      <div class="card"><div class="n">테스트中</div><div class="l">친구 배포 → 플레이스토어 준비</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>설치 · 링크</h2>
+    <div class="panel" style="padding:16px 18px">
+      <div class="links">
+        <a href="https://restrest-doonghwi.web.app/download.html">📲 앱 설치(APK)</a>
+        <a href="https://restrest-doonghwi.web.app">🌐 홈·약관</a>
+        <a href="https://restrest-doonghwi.web.app/privacy.html">개인정보처리방침</a>
+        <a href="https://restrest-doonghwi.web.app/terms.html">이용약관</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>빌드 진행</h2>
+    <div class="panel">
+      <table>
+        <tr><th>단계</th><th>상태</th><th>메모</th></tr>
+        <tr><td>디자인(시안 A) + 도메인 로직</td><td><span class="dot d-done"></span>완료</td><td>cycle_clock 16테스트, 23시 경계 룰</td></tr>
+        <tr><td>UI 전체(온보딩+5탭)</td><td><span class="dot d-done"></span>완료</td><td>멀티그룹, BeReal식 블러</td></tr>
+        <tr><td>Firebase RTDB 백엔드</td><td><span class="dot d-done"></span>완료</td><td>로그인·그룹·기록·반응·댓글·제안·채팅 라이브</td></tr>
+        <tr><td>구글 로그인</td><td><span class="dot d-done"></span>완료</td><td>실기기 확인</td></tr>
+        <tr><td>사진(Cloudinary 무료)</td><td><span class="dot d-done"></span>완료</td><td>카메라→압축→업로드→피드 e2e</td></tr>
+        <tr><td>푸시 알림(FCM + 무료 cron)</td><td><span class="dot d-done"></span>완료</td><td>실기기 수신 확인, 미기록자 타겟팅</td></tr>
+        <tr><td>아이콘·약관 배포</td><td><span class="dot d-done"></span>완료</td><td>Firebase Hosting</td></tr>
+        <tr><td>친구 테스트 배포</td><td><span class="dot d-done"></span>완료</td><td>GitHub Release APK 링크</td></tr>
+        <tr><td>플레이스토어 정식 출시</td><td><span class="dot d-prog"></span>진행</td><td>키스토어·AAB·스토어 자료 준비</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot">사용량 집계는 중앙 dailyapp_stats RTDB로 자동 핑됩니다. © 2026 쉬었음쉬었음</div>
+</div>
+</body>
+</html>
